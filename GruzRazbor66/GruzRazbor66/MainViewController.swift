@@ -8,9 +8,13 @@
 import UIKit
 
 class MainViewController: UIViewController {
+    
+    let property = ["Автомобиль","Цена","Остаток","Код","Артикул"]
 
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var scanerButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var basketButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -24,6 +28,9 @@ class MainViewController: UIViewController {
         scanerButton.clipsToBounds = true
         scanerButton.setTitle("", for: .normal)
         customizeSearchField()
+        
+        basketButton.clipsToBounds = true
+        basketButton.layer.cornerRadius = 6
     }
     
     
@@ -50,3 +57,28 @@ class MainViewController: UIViewController {
     }
 }
 
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "MainTableViewCell", for: indexPath) as! MainTableViewCell
+        cell.propertyLabel.text = property[indexPath.row]
+        return cell
+    }
+}
+
+extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainCollectionViewCell", for: indexPath) as! MainCollectionViewCell
+        cell.imageView.image = UIImage(named: "Rectangle\(indexPath.row + 1)")
+        return cell
+    }
+    
+    
+}
