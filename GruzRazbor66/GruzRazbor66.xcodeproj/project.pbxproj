@@ -15,6 +15,7 @@
 		5D7A52642832187600D0E21D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D7A52622832187600D0E21D /* LaunchScreen.storyboard */; };
 		5DA62F6A283378FE00CDB318 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA62F69283378FE00CDB318 /* MainTableViewCell.swift */; };
 		5DA62F6C283384D600CDB318 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA62F6B283384D600CDB318 /* MainCollectionViewCell.swift */; };
+		5DE36F43283C089100B191C7 /* ScanerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE36F42283C089100B191C7 /* ScanerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		5D7A52652832187600D0E21D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5DA62F69283378FE00CDB318 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		5DA62F6B283384D600CDB318 /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
+		5DE36F42283C089100B191C7 /* ScanerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				5D7A52592832187400D0E21D /* SceneDelegate.swift */,
 				5D7A525B2832187400D0E21D /* MainViewController.swift */,
 				5D7A525D2832187400D0E21D /* Main.storyboard */,
+				5DE36F42283C089100B191C7 /* ScanerViewController.swift */,
 				5DA62F6B283384D600CDB318 /* MainCollectionViewCell.swift */,
 				5DA62F69283378FE00CDB318 /* MainTableViewCell.swift */,
 				5D7A52602832187600D0E21D /* Assets.xcassets */,
@@ -144,6 +147,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DE36F43283C089100B191C7 /* ScanerViewController.swift in Sources */,
 				5D7A525C2832187400D0E21D /* MainViewController.swift in Sources */,
 				5D7A52582832187400D0E21D /* AppDelegate.swift in Sources */,
 				5DA62F6C283384D600CDB318 /* MainCollectionViewCell.swift in Sources */,
