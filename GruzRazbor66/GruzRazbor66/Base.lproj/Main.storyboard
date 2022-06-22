@@ -203,11 +203,72 @@
                         <outlet property="scanerButton" destination="g31-Cf-FwF" id="myh-f4-XSg"/>
                         <outlet property="searchBar" destination="Tqp-Z2-J6H" id="zc5-Va-My8"/>
                         <outlet property="tableView" destination="0Gy-4k-rUv" id="trq-42-vbZ"/>
+                        <segue destination="9t3-vJ-MsQ" kind="show" identifier="showPhoto" id="So5-Ph-DYc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e9c-BT-HK6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="456" y="-351"/>
+        </scene>
+        <!--Photos View Controller-->
+        <scene sceneID="q62-oC-Yvm">
+            <objects>
+                <viewController id="9t3-vJ-MsQ" customClass="PhotosViewController" customModule="GruzRazbor66" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="l0s-VH-8c2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wFB-Jp-8DL">
+                                <rect key="frame" x="0.0" y="216.5" width="414" height="409"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUa-0a-w0I">
+                                <rect key="frame" x="100" y="40" width="214" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="uU0-By-ACY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tJX-0Z-OOU">
+                                <rect key="frame" x="348" y="30" width="46" height="46"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="hCW-3z-qxx"/>
+                                    <constraint firstAttribute="height" constant="46" id="u7J-mg-W90"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="close" title=""/>
+                                <connections>
+                                    <action selector="closePhotosVC:" destination="9t3-vJ-MsQ" eventType="touchUpInside" id="Cxk-ar-tUD"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6b1-pA-jiQ"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="wUa-0a-w0I" firstAttribute="leading" secondItem="6b1-pA-jiQ" secondAttribute="leading" constant="100" id="01s-5X-C4H"/>
+                            <constraint firstItem="wFB-Jp-8DL" firstAttribute="centerX" secondItem="l0s-VH-8c2" secondAttribute="centerX" id="BqD-Qf-j0h"/>
+                            <constraint firstItem="6b1-pA-jiQ" firstAttribute="trailing" secondItem="tJX-0Z-OOU" secondAttribute="trailing" constant="20" id="DEv-Es-xFE"/>
+                            <constraint firstItem="6b1-pA-jiQ" firstAttribute="trailing" secondItem="wFB-Jp-8DL" secondAttribute="trailing" id="K7o-ya-iSw"/>
+                            <constraint firstItem="wFB-Jp-8DL" firstAttribute="height" secondItem="6b1-pA-jiQ" secondAttribute="height" multiplier="207:409" id="QHO-p4-wj1"/>
+                            <constraint firstItem="wFB-Jp-8DL" firstAttribute="centerY" secondItem="l0s-VH-8c2" secondAttribute="centerY" id="SO2-DC-g3C"/>
+                            <constraint firstItem="6b1-pA-jiQ" firstAttribute="trailing" secondItem="wUa-0a-w0I" secondAttribute="trailing" constant="100" id="TO0-eC-vGm"/>
+                            <constraint firstItem="wFB-Jp-8DL" firstAttribute="leading" secondItem="6b1-pA-jiQ" secondAttribute="leading" id="aHf-gy-gvW"/>
+                            <constraint firstItem="tJX-0Z-OOU" firstAttribute="top" secondItem="6b1-pA-jiQ" secondAttribute="top" constant="30" id="bJF-8E-gKV"/>
+                            <constraint firstItem="wUa-0a-w0I" firstAttribute="top" secondItem="6b1-pA-jiQ" secondAttribute="top" constant="40" id="h6D-Xb-VZE"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="E9w-1h-3ez"/>
+                    <connections>
+                        <outlet property="closeButton" destination="tJX-0Z-OOU" id="gwj-oK-vOl"/>
+                        <outlet property="numberLabel" destination="wUa-0a-w0I" id="yh5-eh-sHq"/>
+                        <outlet property="photoImageView" destination="wFB-Jp-8DL" id="2sE-ug-0tE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ymc-mO-0bl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1364" y="-352"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="WrP-BB-S2P">
@@ -232,6 +293,7 @@
     </scenes>
     <resources>
         <image name="cart" width="75" height="47"/>
+        <image name="close" width="24" height="24"/>
         <image name="scaner" width="24" height="24"/>
         <image name="scanerTabBar" width="75" height="47"/>
         <namedColor name="AccentColor">
