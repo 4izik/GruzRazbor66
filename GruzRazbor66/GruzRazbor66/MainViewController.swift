@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Agrume
 
 class MainViewController: UIViewController {
     
@@ -63,14 +64,6 @@ class MainViewController: UIViewController {
             glassIconView.tintColor = UIColor.black
         }
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-                if segue.identifier == "showPhoto" {
-                    guard let vc = segue.destination as? PhotosViewController else { return }
-                    vc.model = model
-                    vc.selectedImage = selectedImage ?? 0
-                }
-    }
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
@@ -105,8 +98,11 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedImage = indexPath.row
-        self.performSegue(withIdentifier: "showPhoto", sender: self)
+        guard let photos = model?.photos else { return }
+        let button = UIBarButtonItem(barButtonSystemItem: .stop, target: nil, action: nil)
+        button.tintColor = .white
+        let agrume = Agrume(images: photos, startIndex: indexPath.row, background: .colored(.black), dismissal: .withButton(button))
+        agrume.show(from: self)
     }
     
 }

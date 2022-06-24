@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5D474EA9283D4ED20064EE9F /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D474EA8283D4ED20064EE9F /* PhotosViewController.swift */; };
 		5D474EAB283D51630064EE9F /* DetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D474EAA283D51630064EE9F /* DetailModel.swift */; };
+		5D4A3CBD2863126D00B1CF57 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4A3CBC2863126D00B1CF57 /* OverlayView.swift */; };
 		5D7A52582832187400D0E21D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7A52572832187400D0E21D /* AppDelegate.swift */; };
 		5D7A525A2832187400D0E21D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7A52592832187400D0E21D /* SceneDelegate.swift */; };
 		5D7A525C2832187400D0E21D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7A525B2832187400D0E21D /* MainViewController.swift */; };
@@ -18,11 +18,12 @@
 		5DA62F6A283378FE00CDB318 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA62F69283378FE00CDB318 /* MainTableViewCell.swift */; };
 		5DA62F6C283384D600CDB318 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA62F6B283384D600CDB318 /* MainCollectionViewCell.swift */; };
 		5DE36F43283C089100B191C7 /* ScanerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE36F42283C089100B191C7 /* ScanerViewController.swift */; };
+		75904AD33D7F1B195291F8CE /* Pods_GruzRazbor66.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75DCA88215F6A92E97E056A6 /* Pods_GruzRazbor66.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5D474EA8283D4ED20064EE9F /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		5D474EAA283D51630064EE9F /* DetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailModel.swift; sourceTree = "<group>"; };
+		5D4A3CBC2863126D00B1CF57 /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		5D7A52542832187400D0E21D /* GruzRazbor66.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GruzRazbor66.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D7A52572832187400D0E21D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5D7A52592832187400D0E21D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -34,6 +35,9 @@
 		5DA62F69283378FE00CDB318 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		5DA62F6B283384D600CDB318 /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 		5DE36F42283C089100B191C7 /* ScanerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanerViewController.swift; sourceTree = "<group>"; };
+		75DCA88215F6A92E97E056A6 /* Pods_GruzRazbor66.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GruzRazbor66.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F7F1EA0A75DA15A8F57C8AD /* Pods-GruzRazbor66.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GruzRazbor66.release.xcconfig"; path = "Target Support Files/Pods-GruzRazbor66/Pods-GruzRazbor66.release.xcconfig"; sourceTree = "<group>"; };
+		AB041AD96148998CF4A8101B /* Pods-GruzRazbor66.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GruzRazbor66.debug.xcconfig"; path = "Target Support Files/Pods-GruzRazbor66/Pods-GruzRazbor66.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75904AD33D7F1B195291F8CE /* Pods_GruzRazbor66.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +57,8 @@
 			children = (
 				5D7A52562832187400D0E21D /* GruzRazbor66 */,
 				5D7A52552832187400D0E21D /* Products */,
+				BC5C7D52BBC29EBCA5DD23F5 /* Pods */,
+				5EE39A779B1C793344969FF3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -69,9 +76,9 @@
 				5D7A52572832187400D0E21D /* AppDelegate.swift */,
 				5D7A52592832187400D0E21D /* SceneDelegate.swift */,
 				5D7A525B2832187400D0E21D /* MainViewController.swift */,
+				5D4A3CBC2863126D00B1CF57 /* OverlayView.swift */,
 				5D474EAA283D51630064EE9F /* DetailModel.swift */,
 				5D7A525D2832187400D0E21D /* Main.storyboard */,
-				5D474EA8283D4ED20064EE9F /* PhotosViewController.swift */,
 				5DE36F42283C089100B191C7 /* ScanerViewController.swift */,
 				5DA62F6B283384D600CDB318 /* MainCollectionViewCell.swift */,
 				5DA62F69283378FE00CDB318 /* MainTableViewCell.swift */,
@@ -82,6 +89,23 @@
 			path = GruzRazbor66;
 			sourceTree = "<group>";
 		};
+		5EE39A779B1C793344969FF3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				75DCA88215F6A92E97E056A6 /* Pods_GruzRazbor66.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BC5C7D52BBC29EBCA5DD23F5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AB041AD96148998CF4A8101B /* Pods-GruzRazbor66.debug.xcconfig */,
+				7F7F1EA0A75DA15A8F57C8AD /* Pods-GruzRazbor66.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -89,9 +113,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5D7A52682832187600D0E21D /* Build configuration list for PBXNativeTarget "GruzRazbor66" */;
 			buildPhases = (
+				98CA94AED2AA17641C2B6318 /* [CP] Check Pods Manifest.lock */,
 				5D7A52502832187400D0E21D /* Sources */,
 				5D7A52512832187400D0E21D /* Frameworks */,
 				5D7A52522832187400D0E21D /* Resources */,
+				73C3EE0A95B0DB421EDA1503 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -148,16 +174,58 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		73C3EE0A95B0DB421EDA1503 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GruzRazbor66/Pods-GruzRazbor66-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GruzRazbor66/Pods-GruzRazbor66-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GruzRazbor66/Pods-GruzRazbor66-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		98CA94AED2AA17641C2B6318 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GruzRazbor66-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5D7A52502832187400D0E21D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				5DE36F43283C089100B191C7 /* ScanerViewController.swift in Sources */,
+				5D4A3CBD2863126D00B1CF57 /* OverlayView.swift in Sources */,
 				5D7A525C2832187400D0E21D /* MainViewController.swift in Sources */,
 				5D7A52582832187400D0E21D /* AppDelegate.swift in Sources */,
 				5DA62F6C283384D600CDB318 /* MainCollectionViewCell.swift in Sources */,
-				5D474EA9283D4ED20064EE9F /* PhotosViewController.swift in Sources */,
 				5DA62F6A283378FE00CDB318 /* MainTableViewCell.swift in Sources */,
 				5D7A525A2832187400D0E21D /* SceneDelegate.swift in Sources */,
 				5D474EAB283D51630064EE9F /* DetailModel.swift in Sources */,
@@ -304,6 +372,7 @@
 		};
 		5D7A52692832187600D0E21D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AB041AD96148998CF4A8101B /* Pods-GruzRazbor66.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -332,6 +401,7 @@
 		};
 		5D7A526A2832187600D0E21D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F7F1EA0A75DA15A8F57C8AD /* Pods-GruzRazbor66.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
