@@ -19,6 +19,7 @@
 		5DA62F6C283384D600CDB318 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA62F6B283384D600CDB318 /* MainCollectionViewCell.swift */; };
 		5DE36F43283C089100B191C7 /* ScanerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE36F42283C089100B191C7 /* ScanerViewController.swift */; };
 		75904AD33D7F1B195291F8CE /* Pods_GruzRazbor66.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75DCA88215F6A92E97E056A6 /* Pods_GruzRazbor66.framework */; };
+		F5A6C2B02866DC85005067D9 /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6C2AF2866DC85005067D9 /* APIController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		75DCA88215F6A92E97E056A6 /* Pods_GruzRazbor66.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GruzRazbor66.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F7F1EA0A75DA15A8F57C8AD /* Pods-GruzRazbor66.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GruzRazbor66.release.xcconfig"; path = "Target Support Files/Pods-GruzRazbor66/Pods-GruzRazbor66.release.xcconfig"; sourceTree = "<group>"; };
 		AB041AD96148998CF4A8101B /* Pods-GruzRazbor66.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GruzRazbor66.debug.xcconfig"; path = "Target Support Files/Pods-GruzRazbor66/Pods-GruzRazbor66.debug.xcconfig"; sourceTree = "<group>"; };
+		F5A6C2AF2866DC85005067D9 /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,17 +75,12 @@
 		5D7A52562832187400D0E21D /* GruzRazbor66 */ = {
 			isa = PBXGroup;
 			children = (
-				5D7A52572832187400D0E21D /* AppDelegate.swift */,
-				5D7A52592832187400D0E21D /* SceneDelegate.swift */,
-				5D7A525B2832187400D0E21D /* MainViewController.swift */,
-				5D4A3CBC2863126D00B1CF57 /* OverlayView.swift */,
-				5D474EAA283D51630064EE9F /* DetailModel.swift */,
-				5D7A525D2832187400D0E21D /* Main.storyboard */,
-				5DE36F42283C089100B191C7 /* ScanerViewController.swift */,
-				5DA62F6B283384D600CDB318 /* MainCollectionViewCell.swift */,
-				5DA62F69283378FE00CDB318 /* MainTableViewCell.swift */,
+				F5A6C2B32866DCED005067D9 /* AppDelegate */,
+				F5A6C2AD2866DC3F005067D9 /* ViewControllers */,
+				F5A6C2B12866DC8B005067D9 /* Network */,
+				F5A6C2AE2866DC6B005067D9 /* Models */,
+				F5A6C2AC2866DC1F005067D9 /* User Interface */,
 				5D7A52602832187600D0E21D /* Assets.xcassets */,
-				5D7A52622832187600D0E21D /* LaunchScreen.storyboard */,
 				5D7A52652832187600D0E21D /* Info.plist */,
 			);
 			path = GruzRazbor66;
@@ -104,6 +101,60 @@
 				7F7F1EA0A75DA15A8F57C8AD /* Pods-GruzRazbor66.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F5A6C2AC2866DC1F005067D9 /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				5D4A3CBC2863126D00B1CF57 /* OverlayView.swift */,
+				F5A6C2B22866DCAB005067D9 /* Cells */,
+				5D7A525D2832187400D0E21D /* Main.storyboard */,
+				5D7A52622832187600D0E21D /* LaunchScreen.storyboard */,
+			);
+			path = "User Interface";
+			sourceTree = "<group>";
+		};
+		F5A6C2AD2866DC3F005067D9 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				5D7A525B2832187400D0E21D /* MainViewController.swift */,
+				5DE36F42283C089100B191C7 /* ScanerViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F5A6C2AE2866DC6B005067D9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5D474EAA283D51630064EE9F /* DetailModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F5A6C2B12866DC8B005067D9 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				F5A6C2AF2866DC85005067D9 /* APIController.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		F5A6C2B22866DCAB005067D9 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				5DA62F69283378FE00CDB318 /* MainTableViewCell.swift */,
+				5DA62F6B283384D600CDB318 /* MainCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		F5A6C2B32866DCED005067D9 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				5D7A52572832187400D0E21D /* AppDelegate.swift */,
+				5D7A52592832187400D0E21D /* SceneDelegate.swift */,
+			);
+			path = AppDelegate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,6 +280,7 @@
 				5DA62F6A283378FE00CDB318 /* MainTableViewCell.swift in Sources */,
 				5D7A525A2832187400D0E21D /* SceneDelegate.swift in Sources */,
 				5D474EAB283D51630064EE9F /* DetailModel.swift in Sources */,
+				F5A6C2B02866DC85005067D9 /* APIController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,7 +357,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -360,7 +412,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
