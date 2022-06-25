@@ -9,21 +9,26 @@ import UIKit
 import Agrume
 
 class MainViewController: UIViewController {
-    
+    // MARK: - Properties
     let property = ["Автомобиль","Цена","Остаток","Код","Артикул"]
     var model: DetailModel?
     var selectedImage: Int?
+    
+    // MARK: - IBOutlets
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var scanerButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var basketButton: UIButton!
+    @IBOutlet weak var photosCollectionView: UICollectionView!
+    @IBOutlet weak var addPhotoViewContainer: UIView!
+    
+    // MARK: - View LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
-        
         model = setDefaultModel()
+        setupUI()
     }
     
     private func setDefaultModel() -> DetailModel {
@@ -33,6 +38,8 @@ class MainViewController: UIViewController {
     }
     
     func setupUI() {
+        guard let model = model else { return }
+
         scanerButton.layer.cornerRadius = 6
         scanerButton.clipsToBounds = true
         scanerButton.setTitle("", for: .normal)
@@ -40,7 +47,12 @@ class MainViewController: UIViewController {
         
         basketButton.clipsToBounds = true
         basketButton.layer.cornerRadius = 6
+        
+        addPhotoViewContainer.isHidden = !model.photos.isEmpty
+        photosCollectionView.isHidden = !addPhotoViewContainer.isHidden
     }
+    
+    
     
     
     fileprivate func customizeSearchField(){
@@ -64,8 +76,17 @@ class MainViewController: UIViewController {
             glassIconView.tintColor = UIColor.black
         }
     }
+    
+    // MARK: - Actions
+    
+    @IBAction func addPhotoDidTapped(_ sender: UIButton) {
+    }
+    
+    
 }
 
+
+// MARK: - CollectionViewDelegate and DataSource
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
@@ -86,6 +107,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+
+// MARK: - CollectionViewDelegate and DataSource
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return model?.photos.count ?? 0
@@ -101,7 +124,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         guard let photos = model?.photos else { return }
         let button = UIBarButtonItem(barButtonSystemItem: .stop, target: nil, action: nil)
         button.tintColor = .white
-        let agrume = Agrume(images: photos, startIndex: indexPath.row, background: .colored(.black), dismissal: .withButton(button))
+        let agrume = Agrume(images: photos, startIndex: indexPath.row, background: .colored(.black), dismissal: .withPanAndButton(.standard, button))
         agrume.show(from: self)
     }
     
