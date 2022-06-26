@@ -7,12 +7,30 @@
 
 import UIKit
 import Agrume
+import PhotosUI
 
 class MainViewController: UIViewController {
     // MARK: - Properties
     let property = ["Автомобиль","Цена","Остаток","Код","Артикул"]
-    var model: DetailModel?
-    var selectedImage: Int?
+    private var model: DetailModel?
+    private var selectedImage: Int?
+    private var item: ImageCellAddType = .photo
+    
+    private lazy var imagePickerController: UIImagePickerController = {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        return imagePickerController
+    }()
+    
+    @available(iOS 14, *)
+    private lazy var phPickerViewController: PHPickerViewController = {
+        var config = PHPickerConfiguration()
+        config.filter = .images
+        config.selectionLimit = 10
+        let phPickerController = PHPickerViewController.init(configuration: config)
+        return phPickerController
+    }()
     
     // MARK: - IBOutlets
     
@@ -52,9 +70,6 @@ class MainViewController: UIViewController {
         photosCollectionView.isHidden = !addPhotoViewContainer.isHidden
     }
     
-    
-    
-    
     fileprivate func customizeSearchField(){
         searchBar.backgroundColor = UIColor.init(red: 237, green: 237, blue: 237, alpha: 1)
         if let searchTextField = searchBar.value(forKey: "searchField") as? UITextField {
@@ -77,9 +92,11 @@ class MainViewController: UIViewController {
         }
     }
     
-    // MARK: - Actions
     
+    
+    // MARK: - Actions
     @IBAction func addPhotoDidTapped(_ sender: UIButton) {
+        presentAddPhotoActionSheet()
     }
     
     
@@ -107,16 +124,65 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+// MARK: - Helpers
+extension MainViewController {
+    private func presentAddPhotoActionSheet() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            alert.addAction(pickerAction(sourceType:.camera))
+        }
+        
+        
+    }
+    
+    private func pickerAction(sourceType: UIImagePickerController.SourceType) -> UIAlertAction {
+        var title: String {
+            switch sourceType {
+            case .photoLibrary:
+                return item.actionAddTitle
+            case .camera:
+                return item.actionAddFromLibraryTitle
+            default:
+                return "Choose Media"
+            }
+        }
+        
+        return UIAlertAction(title: title, style: .default) { action in
+            
+        }
+    }
+    
+//    @available(iOS 14, *)
+//    private func phPickerAction(targetVC: UIViewController) -> UIAlertAction {
+//        return UIAlertAction(title: mediaType.actionLibraryTitle, style: .default) { action in
+//            ImagePickerAuthorizationCenter.checkImageAuthentication(in: targetVC) {
+//                self.presentPHPicker(filter: .images, targetVC: targetVC)
+//            }
+//        }
+//    }
+}
+
 
 // MARK: - CollectionViewDelegate and DataSource
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return model?.photos.count ?? 0
+        return (model?.photos.count ?? 0) + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainCollectionViewCell", for: indexPath) as! MainCollectionViewCell
-        cell.imageView.image = model?.photos[indexPath.row]
+        
+        guard let model = model else { return UICollectionViewCell() }
+        
+        if indexPath.item == model.photos.count {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainImageAddCell", for: indexPath) as! MainImageAddCell
+            cell.addButtonDidTapped = {
+                self.presentAddPhotoActionSheet()
+            }
+            return cell
+        }
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainImageCell", for: indexPath) as! MainImageCell
+        cell.imageView.image = model.photos[indexPath.row]
         return cell
     }
     
@@ -127,5 +193,9 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let agrume = Agrume(images: photos, startIndex: indexPath.row, background: .colored(.black), dismissal: .withPanAndButton(.standard, button))
         agrume.show(from: self)
     }
+    
+}
+
+extension MainViewController:UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
 }

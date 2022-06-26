@@ -1,0 +1,24 @@
+PODS:
+  - Agrume (5.8.0):
+    - SwiftyGif
+  - Alamofire (5.4.4)
+  - SwiftyGif (5.4.3)
+
+DEPENDENCIES:
+  - Agrume
+  - Alamofire
+
+SPEC REPOS:
+  trunk:
+    - Agrume
+    - Alamofire
+    - SwiftyGif
+
+SPEC CHECKSUMS:
+  Agrume: 0b1a42b5bfbc3aa9f0801f2857d8df1138cf2951
+  Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
+  SwiftyGif: 6c3eafd0ce693cad58bb63d2b2fb9bacb8552780
+
+PODFILE CHECKSUM: d2353b53c4fdf28b3a91a480cadf3c6d1fd67e4c
+
+COCOAPODS: 1.11.3
