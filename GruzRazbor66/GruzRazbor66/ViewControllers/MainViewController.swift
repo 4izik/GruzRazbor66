@@ -52,7 +52,7 @@ class MainViewController: UIViewController {
     
     private func setDefaultModel() -> DetailModel {
         let detail = DetailModel(auto: "МАЗ-6430А8-370-011 Тяг...", price: "3 000,00", balance: "5", id: "00001673", vendorCode: "5430-3101012")
-        detail.addPhotos(photos: [UIImage(named: "Rectangle1")!, UIImage(named: "Rectangle2")!])
+//        detail.addPhotos(photos: [UIImage(named: "Rectangle1")!, UIImage(named: "Rectangle2")!])
         return detail
     }
     
@@ -93,7 +93,10 @@ class MainViewController: UIViewController {
         }
     }
     
-    
+    private func updateUI() {
+        addPhotoViewContainer.isHidden = true
+        photosCollectionView.isHidden = false
+    }
     
     // MARK: - Actions
     @IBAction func addPhotoDidTapped(_ sender: UIButton) {
@@ -221,6 +224,7 @@ extension MainViewController:UIImagePickerControllerDelegate, UINavigationContro
         }
         DispatchQueue.main.async {
             self.present(self.imagePickerController, animated: true)
+            self.updateUI()
         }
     }
     
@@ -252,6 +256,7 @@ extension MainViewController: PHPickerViewControllerDelegate {
                     if let model = self.model,let photo = image as? UIImage {
                         DispatchQueue.main.async {
                             model.photos.append(photo)
+                            self.updateUI()
                             self.photosCollectionView.reloadData()
                         }
                     }
