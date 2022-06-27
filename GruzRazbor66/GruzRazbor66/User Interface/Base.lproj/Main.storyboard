@@ -72,17 +72,24 @@
                                             <rect key="frame" x="0.0" y="0.0" width="168" height="168"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fZ1-vZ-ycu">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fZ1-vZ-ycu">
                                                     <rect key="frame" x="0.0" y="0.0" width="168" height="168"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="168" id="9Lw-ap-gaZ"/>
+                                                        <constraint firstAttribute="height" constant="168" id="d0F-vo-CR7"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="fZ1-vZ-ycu" firstAttribute="leading" secondItem="0dp-wC-Yje" secondAttribute="leading" id="0Sj-8H-ghx"/>
-                                                <constraint firstItem="fZ1-vZ-ycu" firstAttribute="top" secondItem="0dp-wC-Yje" secondAttribute="top" id="Fh4-TX-KvI"/>
-                                                <constraint firstAttribute="bottom" secondItem="fZ1-vZ-ycu" secondAttribute="bottom" id="HZx-VS-iRF"/>
-                                                <constraint firstAttribute="trailing" secondItem="fZ1-vZ-ycu" secondAttribute="trailing" id="cGD-7j-IzP"/>
+                                                <constraint firstItem="fZ1-vZ-ycu" firstAttribute="centerX" secondItem="0dp-wC-Yje" secondAttribute="centerX" id="B1g-Ep-rJ9"/>
+                                                <constraint firstItem="fZ1-vZ-ycu" firstAttribute="centerY" secondItem="0dp-wC-Yje" secondAttribute="centerY" id="LN8-AC-2td"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <integer key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="imageView" destination="fZ1-vZ-ycu" id="wnk-W1-JKE"/>
                                         </connections>

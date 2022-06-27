@@ -29,6 +29,7 @@ class MainViewController: UIViewController {
         config.filter = .images
         config.selectionLimit = 10
         let phPickerController = PHPickerViewController.init(configuration: config)
+        phPickerController.delegate = self
         return phPickerController
     }()
     
@@ -221,6 +222,16 @@ extension MainViewController:UIImagePickerControllerDelegate, UINavigationContro
         DispatchQueue.main.async {
             self.present(self.imagePickerController, animated: true)
         }
+    }
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let model = model, let photo = info[.originalImage] as? UIImage else { return }
+        model.photos.append(photo)
+        DispatchQueue.main.async {
+            self.photosCollectionView.reloadData()
+            picker.dismiss(animated: true)
+        }
         
     }
 }
@@ -229,6 +240,23 @@ extension MainViewController:UIImagePickerControllerDelegate, UINavigationContro
 extension MainViewController: PHPickerViewControllerDelegate {
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        print("picker")
+        picker.dismiss(animated: true)
+        let itemProviders = results.map {$0.itemProvider}
+        for item in itemProviders {
+            if item.canLoadObject(ofClass: UIImage.self) {
+                item.loadObject(ofClass: UIImage.self) { image, error in
+                    if let error = error {
+                        print(error.localizedDescription)
+                        return
+                    }
+                    if let model = self.model,let photo = image as? UIImage {
+                        DispatchQueue.main.async {
+                            model.photos.append(photo)
+                            self.photosCollectionView.reloadData()
+                        }
+                    }
+                }
+            }
+        }
     }
 }
