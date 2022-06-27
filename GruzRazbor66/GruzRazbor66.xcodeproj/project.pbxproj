@@ -22,6 +22,7 @@
 		F54E25D728686614006EF797 /* MainImageAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54E25D628686614006EF797 /* MainImageAddCell.swift */; };
 		F54E25D9286866B7006EF797 /* ImageCellAddType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54E25D8286866B7006EF797 /* ImageCellAddType.swift */; };
 		F5A6C2B02866DC85005067D9 /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6C2AF2866DC85005067D9 /* APIController.swift */; };
+		F5C99304286A0AF900ACFA92 /* PhotoAuthCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C99303286A0AF900ACFA92 /* PhotoAuthCenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		F54E25D628686614006EF797 /* MainImageAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainImageAddCell.swift; sourceTree = "<group>"; };
 		F54E25D8286866B7006EF797 /* ImageCellAddType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellAddType.swift; sourceTree = "<group>"; };
 		F5A6C2AF2866DC85005067D9 /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
+		F5C99303286A0AF900ACFA92 /* PhotoAuthCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAuthCenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				F5A6C2B32866DCED005067D9 /* AppDelegate */,
+				F5C99302286A0AD100ACFA92 /* Helpers */,
 				F5A6C2AD2866DC3F005067D9 /* ViewControllers */,
 				F5A6C2B12866DC8B005067D9 /* Network */,
 				F5A6C2AE2866DC6B005067D9 /* Models */,
@@ -161,6 +164,14 @@
 				5D7A52592832187400D0E21D /* SceneDelegate.swift */,
 			);
 			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		F5C99302286A0AD100ACFA92 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F5C99303286A0AF900ACFA92 /* PhotoAuthCenter.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,6 +294,7 @@
 				5D4A3CBD2863126D00B1CF57 /* OverlayView.swift in Sources */,
 				5D7A525C2832187400D0E21D /* MainViewController.swift in Sources */,
 				5D7A52582832187400D0E21D /* AppDelegate.swift in Sources */,
+				F5C99304286A0AF900ACFA92 /* PhotoAuthCenter.swift in Sources */,
 				5DA62F6C283384D600CDB318 /* MainImageCell.swift in Sources */,
 				5DA62F6A283378FE00CDB318 /* MainTableViewCell.swift in Sources */,
 				5D7A525A2832187400D0E21D /* SceneDelegate.swift in Sources */,

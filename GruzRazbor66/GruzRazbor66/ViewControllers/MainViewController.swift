@@ -132,34 +132,47 @@ extension MainViewController {
             alert.addAction(pickerAction(sourceType:.camera))
         }
         
+        if #available(iOS 14, *) {
+            alert.addAction(phPickerAction())
+        } else {
+            alert.addAction(pickerAction(sourceType:.photoLibrary))
+        }
         
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        alert.popoverPresentationController?.sourceView = self.photosCollectionView
+        
+        DispatchQueue.main.async {
+            self.present(alert, animated: true)
+        }
     }
     
     private func pickerAction(sourceType: UIImagePickerController.SourceType) -> UIAlertAction {
         var title: String {
             switch sourceType {
             case .photoLibrary:
-                return item.actionAddTitle
-            case .camera:
                 return item.actionAddFromLibraryTitle
+            case .camera:
+                return item.actionAddTitle
             default:
                 return "Choose Media"
             }
         }
         
         return UIAlertAction(title: title, style: .default) { action in
-            
+            PhotoAuthCenter.checkCameraAuthentication(in: self) {
+                self.chooseMediaWithType(sourceType: sourceType)
+            }
         }
     }
     
-//    @available(iOS 14, *)
-//    private func phPickerAction(targetVC: UIViewController) -> UIAlertAction {
-//        return UIAlertAction(title: mediaType.actionLibraryTitle, style: .default) { action in
-//            ImagePickerAuthorizationCenter.checkImageAuthentication(in: targetVC) {
-//                self.presentPHPicker(filter: .images, targetVC: targetVC)
-//            }
-//        }
-//    }
+    @available(iOS 14, *)
+    private func phPickerAction() -> UIAlertAction {
+        return UIAlertAction(title: item.actionAddFromLibraryTitle, style: .default) { action in
+            PhotoAuthCenter.checkLibraryAuthentication(in: self) {
+                self.present(self.phPickerViewController, animated: true)
+            }
+        }
+    }
 }
 
 
@@ -197,5 +210,25 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 }
 
 extension MainViewController:UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    private func chooseMediaWithType(sourceType: UIImagePickerController.SourceType) {
+        imagePickerController.sourceType = sourceType
+        
+        imagePickerController.mediaTypes = UIImagePickerController.availableMediaTypes(for: sourceType) ?? []
+        switch item {
+        case .photo:
+            imagePickerController.mediaTypes = ["public.image"]
+        }
+        DispatchQueue.main.async {
+            self.present(self.imagePickerController, animated: true)
+        }
+        
+    }
+}
+
+@available(iOS 14, *)
+extension MainViewController: PHPickerViewControllerDelegate {
     
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        print("picker")
+    }
 }
