@@ -23,6 +23,11 @@
 		F54E25D9286866B7006EF797 /* ImageCellAddType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54E25D8286866B7006EF797 /* ImageCellAddType.swift */; };
 		F5A6C2B02866DC85005067D9 /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6C2AF2866DC85005067D9 /* APIController.swift */; };
 		F5C99304286A0AF900ACFA92 /* PhotoAuthCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C99303286A0AF900ACFA92 /* PhotoAuthCenter.swift */; };
+		F5D382AA286CBCA1002A973A /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D382A9286CBCA1002A973A /* NetworkConstants.swift */; };
+		F5D382AC286CC6D2002A973A /* ProductDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D382AB286CC6D2002A973A /* ProductDto.swift */; };
+		F5D382AE286CCE02002A973A /* PriceDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D382AD286CCE02002A973A /* PriceDto.swift */; };
+		F5D382B1286CCFA6002A973A /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D382B0286CCFA6002A973A /* Product.swift */; };
+		F5D382B3286CD109002A973A /* Price.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D382B2286CD109002A973A /* Price.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +51,11 @@
 		F54E25D8286866B7006EF797 /* ImageCellAddType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellAddType.swift; sourceTree = "<group>"; };
 		F5A6C2AF2866DC85005067D9 /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
 		F5C99303286A0AF900ACFA92 /* PhotoAuthCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAuthCenter.swift; sourceTree = "<group>"; };
+		F5D382A9286CBCA1002A973A /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
+		F5D382AB286CC6D2002A973A /* ProductDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDto.swift; sourceTree = "<group>"; };
+		F5D382AD286CCE02002A973A /* PriceDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceDto.swift; sourceTree = "<group>"; };
+		F5D382B0286CCFA6002A973A /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		F5D382B2286CD109002A973A /* Price.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Price.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +145,9 @@
 			children = (
 				5D474EAA283D51630064EE9F /* DetailModel.swift */,
 				F54E25D8286866B7006EF797 /* ImageCellAddType.swift */,
+				F5D382AF286CCF8D002A973A /* Dtos */,
+				F5D382B0286CCFA6002A973A /* Product.swift */,
+				F5D382B2286CD109002A973A /* Price.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -143,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				F5A6C2AF2866DC85005067D9 /* APIController.swift */,
+				F5D382A9286CBCA1002A973A /* NetworkConstants.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -172,6 +186,15 @@
 				F5C99303286A0AF900ACFA92 /* PhotoAuthCenter.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F5D382AF286CCF8D002A973A /* Dtos */ = {
+			isa = PBXGroup;
+			children = (
+				F5D382AB286CC6D2002A973A /* ProductDto.swift */,
+				F5D382AD286CCE02002A973A /* PriceDto.swift */,
+			);
+			path = Dtos;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,16 +313,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				F54E25D728686614006EF797 /* MainImageAddCell.swift in Sources */,
+				F5D382AC286CC6D2002A973A /* ProductDto.swift in Sources */,
 				5DE36F43283C089100B191C7 /* ScanerViewController.swift in Sources */,
+				F5D382AA286CBCA1002A973A /* NetworkConstants.swift in Sources */,
 				5D4A3CBD2863126D00B1CF57 /* OverlayView.swift in Sources */,
+				F5D382B3286CD109002A973A /* Price.swift in Sources */,
 				5D7A525C2832187400D0E21D /* MainViewController.swift in Sources */,
 				5D7A52582832187400D0E21D /* AppDelegate.swift in Sources */,
 				F5C99304286A0AF900ACFA92 /* PhotoAuthCenter.swift in Sources */,
 				5DA62F6C283384D600CDB318 /* MainImageCell.swift in Sources */,
+				F5D382B1286CCFA6002A973A /* Product.swift in Sources */,
 				5DA62F6A283378FE00CDB318 /* MainTableViewCell.swift in Sources */,
 				5D7A525A2832187400D0E21D /* SceneDelegate.swift in Sources */,
 				5D474EAB283D51630064EE9F /* DetailModel.swift in Sources */,
 				F54E25D9286866B7006EF797 /* ImageCellAddType.swift in Sources */,
+				F5D382AE286CCE02002A973A /* PriceDto.swift in Sources */,
 				F5A6C2B02866DC85005067D9 /* APIController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
