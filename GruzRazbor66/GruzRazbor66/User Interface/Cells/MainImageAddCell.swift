@@ -8,12 +8,12 @@
 import UIKit
 
 class MainImageAddCell: UICollectionViewCell {
-    
+    // MARK: - Properties
     var imageType: ImageCellAddType = .photo
     var addButtonDidTapped: (()->())?
+    // MARK: - IBOutlets
     @IBOutlet weak var addButton: UIButton!
-    
-   
+    // MARK: - Actions
     @IBAction func addButtonDidTapped(_ sender: Any) {
         addButtonDidTapped?()
     }

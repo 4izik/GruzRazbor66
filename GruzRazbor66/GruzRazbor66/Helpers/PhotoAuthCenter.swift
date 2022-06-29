@@ -27,8 +27,8 @@ class PhotoAuthCenter {
         case .denied, .restricted :
             DispatchQueue.main.async {
                 showAlertAuthError(in: controller,
-                                              withTitle: "Нет доступа к медиатеке",
-                                              withMessage: "Пожалуйста предоставьте доступ к медиатеке")
+                                   withTitle: "Нет доступа к медиатеке",
+                                   withMessage: "Пожалуйста предоставьте доступ к медиатеке")
             }
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization() { newStatus in
@@ -51,13 +51,13 @@ class PhotoAuthCenter {
     static func checkCameraAuthentication(in controller: UIViewController, completion: @escaping () -> ()) {
         let cameraMediaType = AVMediaType.video
         let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: cameraMediaType)
-
+        
         switch cameraAuthorizationStatus {
         case .denied, .restricted:
             DispatchQueue.main.async {
                 self.showAlertAuthError(in: controller,
-                                                   withTitle: "Нет доступа к камере",
-                                                   withMessage: "Пожалуйста предоставьте доступ к камере")
+                                        withTitle: "Нет доступа к камере",
+                                        withMessage: "Пожалуйста предоставьте доступ к камере")
             }
         case .authorized:
             DispatchQueue.main.async {
@@ -72,7 +72,6 @@ class PhotoAuthCenter {
                             completion()
                         }
                     }
-                    
                 }
             }
         default: return
@@ -80,23 +79,23 @@ class PhotoAuthCenter {
     }
     
     private static func showAlertAuthError(in controller: UIViewController,
-                                                      withTitle title: String,
-                                                      withMessage message: String) {
-
-        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
-
+                                           withTitle title: String,
+                                           withMessage message: String) {
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
         let settingsAction = UIAlertAction(title: "Настройки", style: .default) { (_) in
             let settingsUrl = NSURL(string: UIApplication.openSettingsURLString)
             if let url = settingsUrl {
                 UIApplication.shared.open(url as URL)
             }
         }
-
+        
         let cancelAction = UIAlertAction(title: "Отмена", style: .default, handler: nil)
-
-        ac.addAction(cancelAction)
-        ac.addAction(settingsAction)
-
-        controller.present(ac, animated: true)
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(settingsAction)
+        
+        controller.present(alertController, animated: true)
     }
 }

@@ -52,13 +52,13 @@ class MainViewController: UIViewController {
     
     private func setDefaultModel() -> DetailModel {
         let detail = DetailModel(auto: "МАЗ-6430А8-370-011 Тяг...", price: "3 000,00", balance: "5", id: "00001673", vendorCode: "5430-3101012")
-//        detail.addPhotos(photos: [UIImage(named: "Rectangle1")!, UIImage(named: "Rectangle2")!])
+        //        detail.addPhotos(photos: [UIImage(named: "Rectangle1")!, UIImage(named: "Rectangle2")!])
         return detail
     }
     
     func setupUI() {
         guard let model = model else { return }
-
+        
         scanerButton.layer.cornerRadius = 6
         scanerButton.clipsToBounds = true
         scanerButton.setTitle("", for: .normal)
@@ -83,7 +83,7 @@ class MainViewController: UIViewController {
             ])
             searchTextField.clipsToBounds = true
             searchTextField.layer.cornerRadius = 6.0
-        
+            
             let attributeDict = [NSAttributedString.Key.foregroundColor: UIColor.black]
             searchTextField.attributedPlaceholder = NSAttributedString(string: "Поиск по коду", attributes: attributeDict)
             
@@ -94,16 +94,23 @@ class MainViewController: UIViewController {
     }
     
     private func updateUI() {
-        addPhotoViewContainer.isHidden = true
-        photosCollectionView.isHidden = false
+        if !(model?.photos.isEmpty ?? true) {
+            addPhotoViewContainer.isHidden = true
+            photosCollectionView.isHidden = false
+        }
+    }
+    
+    private func addPhoto(photo: UIImage) {
+        guard let model = model else { return }
+        model.photos.append(photo)
+        updateUI()
+        photosCollectionView.reloadData()
     }
     
     // MARK: - Actions
     @IBAction func addPhotoDidTapped(_ sender: UIButton) {
         presentAddPhotoActionSheet()
     }
-    
-    
 }
 
 
@@ -116,14 +123,14 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "MainTableViewCell", for: indexPath) as! MainTableViewCell
         cell.propertyLabel.text = property[indexPath.row]
-    switch indexPath.row {
+        switch indexPath.row {
         case 0: cell.valueLabel.text = model?.auto
         case 1: cell.valueLabel.text = model?.price
         case 2: cell.valueLabel.text = model?.balance
         case 3: cell.valueLabel.text = model?.id
         case 4: cell.valueLabel.text = model?.vendorСode
         default: cell.valueLabel.text = "test"
-    }
+        }
         return cell
     }
 }
@@ -230,10 +237,9 @@ extension MainViewController:UIImagePickerControllerDelegate, UINavigationContro
     
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let model = model, let photo = info[.originalImage] as? UIImage else { return }
-        model.photos.append(photo)
+        guard let photo = info[.originalImage] as? UIImage else { return }
         DispatchQueue.main.async {
-            self.photosCollectionView.reloadData()
+            self.addPhoto(photo: photo)
             picker.dismiss(animated: true)
         }
         
@@ -249,15 +255,15 @@ extension MainViewController: PHPickerViewControllerDelegate {
         for item in itemProviders {
             if item.canLoadObject(ofClass: UIImage.self) {
                 item.loadObject(ofClass: UIImage.self) { image, error in
+                    
                     if let error = error {
                         print(error.localizedDescription)
                         return
                     }
-                    if let model = self.model,let photo = image as? UIImage {
+                    
+                    if let photo = image as? UIImage {
                         DispatchQueue.main.async {
-                            model.photos.append(photo)
-                            self.updateUI()
-                            self.photosCollectionView.reloadData()
+                            self.addPhoto(photo: photo)
                         }
                     }
                 }
