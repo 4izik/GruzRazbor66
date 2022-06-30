@@ -22,6 +22,7 @@
 		F54E25D728686614006EF797 /* MainImageAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54E25D628686614006EF797 /* MainImageAddCell.swift */; };
 		F54E25D9286866B7006EF797 /* ImageCellAddType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54E25D8286866B7006EF797 /* ImageCellAddType.swift */; };
 		F5A6C2B02866DC85005067D9 /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6C2AF2866DC85005067D9 /* APIController.swift */; };
+		F5C8D05E286E11CB00FAD4AC /* NSErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C8D05D286E11CB00FAD4AC /* NSErrorExtension.swift */; };
 		F5C99304286A0AF900ACFA92 /* PhotoAuthCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C99303286A0AF900ACFA92 /* PhotoAuthCenter.swift */; };
 		F5D382AA286CBCA1002A973A /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D382A9286CBCA1002A973A /* NetworkConstants.swift */; };
 		F5D382AC286CC6D2002A973A /* ProductDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D382AB286CC6D2002A973A /* ProductDto.swift */; };
@@ -50,6 +51,7 @@
 		F54E25D628686614006EF797 /* MainImageAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainImageAddCell.swift; sourceTree = "<group>"; };
 		F54E25D8286866B7006EF797 /* ImageCellAddType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellAddType.swift; sourceTree = "<group>"; };
 		F5A6C2AF2866DC85005067D9 /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
+		F5C8D05D286E11CB00FAD4AC /* NSErrorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSErrorExtension.swift; sourceTree = "<group>"; };
 		F5C99303286A0AF900ACFA92 /* PhotoAuthCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAuthCenter.swift; sourceTree = "<group>"; };
 		F5D382A9286CBCA1002A973A /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		F5D382AB286CC6D2002A973A /* ProductDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDto.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				F5C99303286A0AF900ACFA92 /* PhotoAuthCenter.swift */,
+				F5C8D05D286E11CB00FAD4AC /* NSErrorExtension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				5DE36F43283C089100B191C7 /* ScanerViewController.swift in Sources */,
 				F5D382AA286CBCA1002A973A /* NetworkConstants.swift in Sources */,
 				5D4A3CBD2863126D00B1CF57 /* OverlayView.swift in Sources */,
+				F5C8D05E286E11CB00FAD4AC /* NSErrorExtension.swift in Sources */,
 				F5D382B3286CD109002A973A /* Price.swift in Sources */,
 				5D7A525C2832187400D0E21D /* MainViewController.swift in Sources */,
 				5D7A52582832187400D0E21D /* AppDelegate.swift in Sources */,
