@@ -7,5 +7,6 @@ target 'GruzRazbor66' do
 
   # Pods for GruzRazbor66
 pod "Agrume"
+pod "Alamofire"
 
 end

@@ -16,9 +16,18 @@
 		5D7A52612832187600D0E21D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D7A52602832187600D0E21D /* Assets.xcassets */; };
 		5D7A52642832187600D0E21D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D7A52622832187600D0E21D /* LaunchScreen.storyboard */; };
 		5DA62F6A283378FE00CDB318 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA62F69283378FE00CDB318 /* MainTableViewCell.swift */; };
-		5DA62F6C283384D600CDB318 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA62F6B283384D600CDB318 /* MainCollectionViewCell.swift */; };
+		5DA62F6C283384D600CDB318 /* MainImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA62F6B283384D600CDB318 /* MainImageCell.swift */; };
 		5DE36F43283C089100B191C7 /* ScanerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE36F42283C089100B191C7 /* ScanerViewController.swift */; };
 		75904AD33D7F1B195291F8CE /* Pods_GruzRazbor66.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75DCA88215F6A92E97E056A6 /* Pods_GruzRazbor66.framework */; };
+		F54E25D728686614006EF797 /* MainImageAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54E25D628686614006EF797 /* MainImageAddCell.swift */; };
+		F54E25D9286866B7006EF797 /* ImageCellAddType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54E25D8286866B7006EF797 /* ImageCellAddType.swift */; };
+		F5A6C2B02866DC85005067D9 /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6C2AF2866DC85005067D9 /* APIController.swift */; };
+		F5C99304286A0AF900ACFA92 /* PhotoAuthCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C99303286A0AF900ACFA92 /* PhotoAuthCenter.swift */; };
+		F5D382AA286CBCA1002A973A /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D382A9286CBCA1002A973A /* NetworkConstants.swift */; };
+		F5D382AC286CC6D2002A973A /* ProductDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D382AB286CC6D2002A973A /* ProductDto.swift */; };
+		F5D382AE286CCE02002A973A /* PriceDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D382AD286CCE02002A973A /* PriceDto.swift */; };
+		F5D382B1286CCFA6002A973A /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D382B0286CCFA6002A973A /* Product.swift */; };
+		F5D382B3286CD109002A973A /* Price.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D382B2286CD109002A973A /* Price.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,17 +36,26 @@
 		5D7A52542832187400D0E21D /* GruzRazbor66.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GruzRazbor66.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D7A52572832187400D0E21D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5D7A52592832187400D0E21D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		5D7A525B2832187400D0E21D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		5D7A525B2832187400D0E21D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 1; };
 		5D7A525E2832187400D0E21D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5D7A52602832187600D0E21D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5D7A52632832187600D0E21D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5D7A52652832187600D0E21D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5DA62F69283378FE00CDB318 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
-		5DA62F6B283384D600CDB318 /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
+		5DA62F6B283384D600CDB318 /* MainImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainImageCell.swift; sourceTree = "<group>"; };
 		5DE36F42283C089100B191C7 /* ScanerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanerViewController.swift; sourceTree = "<group>"; };
 		75DCA88215F6A92E97E056A6 /* Pods_GruzRazbor66.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GruzRazbor66.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F7F1EA0A75DA15A8F57C8AD /* Pods-GruzRazbor66.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GruzRazbor66.release.xcconfig"; path = "Target Support Files/Pods-GruzRazbor66/Pods-GruzRazbor66.release.xcconfig"; sourceTree = "<group>"; };
 		AB041AD96148998CF4A8101B /* Pods-GruzRazbor66.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GruzRazbor66.debug.xcconfig"; path = "Target Support Files/Pods-GruzRazbor66/Pods-GruzRazbor66.debug.xcconfig"; sourceTree = "<group>"; };
+		F54E25D628686614006EF797 /* MainImageAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainImageAddCell.swift; sourceTree = "<group>"; };
+		F54E25D8286866B7006EF797 /* ImageCellAddType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellAddType.swift; sourceTree = "<group>"; };
+		F5A6C2AF2866DC85005067D9 /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
+		F5C99303286A0AF900ACFA92 /* PhotoAuthCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAuthCenter.swift; sourceTree = "<group>"; };
+		F5D382A9286CBCA1002A973A /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
+		F5D382AB286CC6D2002A973A /* ProductDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDto.swift; sourceTree = "<group>"; };
+		F5D382AD286CCE02002A973A /* PriceDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceDto.swift; sourceTree = "<group>"; };
+		F5D382B0286CCFA6002A973A /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		F5D382B2286CD109002A973A /* Price.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Price.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,17 +91,13 @@
 		5D7A52562832187400D0E21D /* GruzRazbor66 */ = {
 			isa = PBXGroup;
 			children = (
-				5D7A52572832187400D0E21D /* AppDelegate.swift */,
-				5D7A52592832187400D0E21D /* SceneDelegate.swift */,
-				5D7A525B2832187400D0E21D /* MainViewController.swift */,
-				5D4A3CBC2863126D00B1CF57 /* OverlayView.swift */,
-				5D474EAA283D51630064EE9F /* DetailModel.swift */,
-				5D7A525D2832187400D0E21D /* Main.storyboard */,
-				5DE36F42283C089100B191C7 /* ScanerViewController.swift */,
-				5DA62F6B283384D600CDB318 /* MainCollectionViewCell.swift */,
-				5DA62F69283378FE00CDB318 /* MainTableViewCell.swift */,
+				F5A6C2B32866DCED005067D9 /* AppDelegate */,
+				F5C99302286A0AD100ACFA92 /* Helpers */,
+				F5A6C2AD2866DC3F005067D9 /* ViewControllers */,
+				F5A6C2B12866DC8B005067D9 /* Network */,
+				F5A6C2AE2866DC6B005067D9 /* Models */,
+				F5A6C2AC2866DC1F005067D9 /* User Interface */,
 				5D7A52602832187600D0E21D /* Assets.xcassets */,
-				5D7A52622832187600D0E21D /* LaunchScreen.storyboard */,
 				5D7A52652832187600D0E21D /* Info.plist */,
 			);
 			path = GruzRazbor66;
@@ -104,6 +118,83 @@
 				7F7F1EA0A75DA15A8F57C8AD /* Pods-GruzRazbor66.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F5A6C2AC2866DC1F005067D9 /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				5D4A3CBC2863126D00B1CF57 /* OverlayView.swift */,
+				F5A6C2B22866DCAB005067D9 /* Cells */,
+				5D7A525D2832187400D0E21D /* Main.storyboard */,
+				5D7A52622832187600D0E21D /* LaunchScreen.storyboard */,
+			);
+			path = "User Interface";
+			sourceTree = "<group>";
+		};
+		F5A6C2AD2866DC3F005067D9 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				5D7A525B2832187400D0E21D /* MainViewController.swift */,
+				5DE36F42283C089100B191C7 /* ScanerViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F5A6C2AE2866DC6B005067D9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5D474EAA283D51630064EE9F /* DetailModel.swift */,
+				F54E25D8286866B7006EF797 /* ImageCellAddType.swift */,
+				F5D382AF286CCF8D002A973A /* Dtos */,
+				F5D382B0286CCFA6002A973A /* Product.swift */,
+				F5D382B2286CD109002A973A /* Price.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F5A6C2B12866DC8B005067D9 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				F5A6C2AF2866DC85005067D9 /* APIController.swift */,
+				F5D382A9286CBCA1002A973A /* NetworkConstants.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		F5A6C2B22866DCAB005067D9 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				5DA62F69283378FE00CDB318 /* MainTableViewCell.swift */,
+				5DA62F6B283384D600CDB318 /* MainImageCell.swift */,
+				F54E25D628686614006EF797 /* MainImageAddCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		F5A6C2B32866DCED005067D9 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				5D7A52572832187400D0E21D /* AppDelegate.swift */,
+				5D7A52592832187400D0E21D /* SceneDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		F5C99302286A0AD100ACFA92 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F5C99303286A0AF900ACFA92 /* PhotoAuthCenter.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F5D382AF286CCF8D002A973A /* Dtos */ = {
+			isa = PBXGroup;
+			children = (
+				F5D382AB286CC6D2002A973A /* ProductDto.swift */,
+				F5D382AD286CCE02002A973A /* PriceDto.swift */,
+			);
+			path = Dtos;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,14 +312,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F54E25D728686614006EF797 /* MainImageAddCell.swift in Sources */,
+				F5D382AC286CC6D2002A973A /* ProductDto.swift in Sources */,
 				5DE36F43283C089100B191C7 /* ScanerViewController.swift in Sources */,
+				F5D382AA286CBCA1002A973A /* NetworkConstants.swift in Sources */,
 				5D4A3CBD2863126D00B1CF57 /* OverlayView.swift in Sources */,
+				F5D382B3286CD109002A973A /* Price.swift in Sources */,
 				5D7A525C2832187400D0E21D /* MainViewController.swift in Sources */,
 				5D7A52582832187400D0E21D /* AppDelegate.swift in Sources */,
-				5DA62F6C283384D600CDB318 /* MainCollectionViewCell.swift in Sources */,
+				F5C99304286A0AF900ACFA92 /* PhotoAuthCenter.swift in Sources */,
+				5DA62F6C283384D600CDB318 /* MainImageCell.swift in Sources */,
+				F5D382B1286CCFA6002A973A /* Product.swift in Sources */,
 				5DA62F6A283378FE00CDB318 /* MainTableViewCell.swift in Sources */,
 				5D7A525A2832187400D0E21D /* SceneDelegate.swift in Sources */,
 				5D474EAB283D51630064EE9F /* DetailModel.swift in Sources */,
+				F54E25D9286866B7006EF797 /* ImageCellAddType.swift in Sources */,
+				F5D382AE286CCE02002A973A /* PriceDto.swift in Sources */,
+				F5A6C2B02866DC85005067D9 /* APIController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,7 +405,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -360,7 +460,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -378,9 +478,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TRVL9SXHFC;
+				DEVELOPMENT_TEAM = 58F3PKV5W9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GruzRazbor66/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Приложению требуется доступ к камере для сканера qr-кода";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -391,7 +492,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.group.GruzRazbor66;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gruzrapbor66.bobermiha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -407,9 +508,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TRVL9SXHFC;
+				DEVELOPMENT_TEAM = 58F3PKV5W9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GruzRazbor66/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Приложению требуется доступ к камере для сканера qr-кода";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -420,7 +522,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.group.GruzRazbor66;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gruzrapbor66.bobermiha;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
