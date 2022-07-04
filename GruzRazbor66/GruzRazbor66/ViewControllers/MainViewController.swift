@@ -15,7 +15,7 @@ class MainViewController: UIViewController {
     private var model: DetailModel?
     private var selectedImage: Int?
     private var item: ImageCellAddType = .photo
-    
+    private let apiController = APIController.shared
     private lazy var imagePickerController: UIImagePickerController = {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
@@ -48,6 +48,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         model = setDefaultModel()
         setupUI()
+        loadImages()
     }
     
     private func setDefaultModel() -> DetailModel {
@@ -105,6 +106,22 @@ class MainViewController: UIViewController {
         model.photos.append(photo)
         updateUI()
         photosCollectionView.reloadData()
+    }
+    
+    private func loadImages() {
+        let params = ["НоменклатураИдентификатор":"5dbb89b8-d027-11ec-9740-002655e90aec"]
+        apiController.getProductImages(params: params) { result in
+            switch result {
+            case .success(let model):
+                print(model.name)
+                let baseString = model.base64String.decodeBase64()
+                let imageData = Data.init(base64Encoded: baseString!)
+                let image = UIImage(data: imageData!)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
     }
     
     // MARK: - Actions

@@ -8,8 +8,10 @@
 import Alamofire
 
 class APIController {
-    let shared = APIController()
-    private init() {}
+    
+    static let shared = APIController()!
+   
+    private init?() {}
     
     func getProductInfo(params: [String: String], completion: @escaping ((Result<Product, NSError>) -> Void)) {
         AF.request((NetworkConstants.host + NetworkConstants.getProductInfo), method: .get, parameters: params)
@@ -32,6 +34,20 @@ class APIController {
                 switch response.result {
                 case .success(let dto):
                     let model = Price(dto: dto)
+                    completion(.success(model))
+                case .failure(let error):
+                    completion(.failure(NSError.makeEror(description: error.localizedDescription)))
+                }
+            }
+    }
+    
+    func getProductImages(params: [String:String], completion: @escaping ((Result<ImageModel, NSError>) -> Void)) {
+        AF.request(NetworkConstants.host + NetworkConstants.getProductPictures, method: .get, parameters: params)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: ImagesDto.self) { response in
+                switch response.result {
+                case .success(let dto):
+                    let model = ImageModel(dto: dto)
                     completion(.success(model))
                 case .failure(let error):
                     completion(.failure(NSError.makeEror(description: error.localizedDescription)))
