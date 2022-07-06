@@ -10,11 +10,26 @@ import Alamofire
 class APIController {
     
     static let shared = APIController()!
-   
+    
+    static let manager: Alamofire.Session = {
+        let manager = ServerTrustManager(evaluators: ["10.10.1.2": DisabledTrustEvaluator()])
+        
+        //        let configuration = URLSessionConfiguration.default
+        //        configuration.timeoutIntervalForRequest = 60
+        //
+        //        var additionalHeaders = AF.session.configuration.httpAdditionalHeaders
+        //        additionalHeaders?["Content-Type"] = "application/json"
+        //        additionalHeaders?["Accept"] = "application/json"
+        //
+        //        configuration.httpAdditionalHeaders = additionalHeaders
+        let session = Session(serverTrustManager: manager)
+        return session
+    }()
+    
     private init?() {}
     
-    func getProductInfo(params: [String: String], completion: @escaping ((Result<Product, NSError>) -> Void)) {
-        AF.request((NetworkConstants.host + NetworkConstants.getProductInfo), method: .get, parameters: params)
+    func getProductInfo(params: [String: String], headers: HTTPHeaders? = nil, completion: @escaping ((Result<Product, NSError>) -> Void)) {
+        APIController.manager.request((NetworkConstants.host + NetworkConstants.getProductInfo), method: .get, parameters: params, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: ProductDto.self) { response in
                 switch response.result {
@@ -27,8 +42,8 @@ class APIController {
             }
     }
     
-    func getProductPrices(params: [String: String], completion: @escaping ((Result<Price, NSError>) -> Void)) {
-        AF.request((NetworkConstants.host + NetworkConstants.getSuppliersPrices), method: .get, parameters: params)
+    func getProductPrices(params: [String: String], headers: HTTPHeaders? = nil, completion: @escaping ((Result<Price, NSError>) -> Void)) {
+        APIController.manager.request((NetworkConstants.host + NetworkConstants.getSuppliersPrices), method: .get, parameters: params, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: PriceDto.self) { response in
                 switch response.result {
@@ -41,14 +56,21 @@ class APIController {
             }
     }
     
-    func getProductImages(params: [String:String], completion: @escaping ((Result<ImageModel, NSError>) -> Void)) {
-        AF.request(NetworkConstants.host + NetworkConstants.getProductPictures, method: .get, parameters: params)
-            .validate(statusCode: 200..<300)
-            .responseDecodable(of: ImagesDto.self) { response in
+    func getProductImages(params: [String:String], headers: HTTPHeaders? = nil, completion: @escaping ((Result<[String], NSError>) -> Void)) {
+        APIController.manager.request(NetworkConstants.host + NetworkConstants.getProductPictures, method: .get, parameters: params, headers: headers)
+            .validate(statusCode:200..<300)
+            .responseJSON { response in
                 switch response.result {
                 case .success(let dto):
-                    let model = ImageModel(dto: dto)
-                    completion(.success(model))
+                    if let data = dto as? [[String: String]] {
+                        var photos: [String] = []
+                        for model in data {
+                            if let photosString = model["ДанныеФайлаBase64"] {
+                                photos.append(photosString)
+                            }
+                        }
+                        completion(.success(photos))
+                    }
                 case .failure(let error):
                     completion(.failure(NSError.makeEror(description: error.localizedDescription)))
                 }

@@ -8,6 +8,7 @@
 import UIKit
 import Agrume
 import PhotosUI
+import Alamofire
 
 class MainViewController: UIViewController {
     // MARK: - Properties
@@ -110,13 +111,25 @@ class MainViewController: UIViewController {
     
     private func loadImages() {
         let params = ["НоменклатураИдентификатор":"5dbb89b8-d027-11ec-9740-002655e90aec"]
-        apiController.getProductImages(params: params) { result in
+        let userName = "Булгаков"
+        let password = "GruzGrazbor66"
+        let base64encoded = "\(userName):\(password)".data(using: .utf8)?.base64EncodedString() ?? ""
+//        let base64encoded = "\(userName):\(password)".encodeBase64()
+        let headers: HTTPHeaders = [
+            "Authorization":"Basic 0JHRg9C70LPQsNC60L7QsjpHcnV6UmF6Ym9yNjY="
+        ]
+        
+        apiController.getProductImages(params: params, headers: headers) { result in
             switch result {
-            case .success(let model):
-                print(model.name)
-                let baseString = model.base64String.decodeBase64()
-                let imageData = Data.init(base64Encoded: baseString!)
-                let image = UIImage(data: imageData!)
+            case .success(let photos):
+                print(photos.count)
+                for photo in photos {
+                    let dataDecoded : Data = Data(base64Encoded: photo, options: .ignoreUnknownCharacters)!
+                    let decodedimage = UIImage(data: dataDecoded)
+                    DispatchQueue.main.async {
+                        self.addPhoto(photo: decodedimage!)
+                    }
+                }
             case .failure(let error):
                 print(error.localizedDescription)
             }

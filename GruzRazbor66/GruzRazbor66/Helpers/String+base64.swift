@@ -19,4 +19,6 @@ extension String {
     func encodeBase64() -> String {
         return Data(self.utf8).base64EncodedString()
     }
+    
+    
 }
