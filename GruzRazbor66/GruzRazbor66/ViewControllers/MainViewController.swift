@@ -47,16 +47,17 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        model = setDefaultModel()
+//        model = setDefaultModel()
         setupUI()
+        loadProductInfo()
         loadImages()
     }
     
-    private func setDefaultModel() -> DetailModel {
-        let detail = DetailModel(auto: "МАЗ-6430А8-370-011 Тяг...", price: "3 000,00", balance: "5", id: "00001673", vendorCode: "5430-3101012")
-        //        detail.addPhotos(photos: [UIImage(named: "Rectangle1")!, UIImage(named: "Rectangle2")!])
-        return detail
-    }
+//    private func setDefaultModel() -> DetailModel {
+////        let detail = DetailModel(auto: "МАЗ-6430А8-370-011 Тяг...", price: "3 000,00", balance: "5", id: "00001673", vendorCode: "5430-3101012")
+//        //        detail.addPhotos(photos: [UIImage(named: "Rectangle1")!, UIImage(named: "Rectangle2")!])
+////        return detail
+//    }
     
     func setupUI() {
         guard let model = model else { return }
@@ -96,17 +97,24 @@ class MainViewController: UIViewController {
     }
     
     private func updateUI() {
-        if !(model?.photos.isEmpty ?? true) {
+//        if !(model?.photos.isEmpty ?? true) {
+//            addPhotoViewContainer.isHidden = true
+//            photosCollectionView.isHidden = false
+//        }
+        if let model = model, model.photos.isEmpty {
             addPhotoViewContainer.isHidden = true
             photosCollectionView.isHidden = false
+        } else {
+            photosCollectionView.isHidden = true
+            addPhotoViewContainer.isHidden = false
         }
     }
     
     private func addPhoto(photo: UIImage) {
-        guard let model = model else { return }
+        guard var model = model else { return }
         model.photos.append(photo)
-        updateUI()
         photosCollectionView.reloadData()
+        updateUI()
     }
     
     private func loadImages() {
@@ -128,7 +136,29 @@ class MainViewController: UIViewController {
                     let decodedimage = UIImage(data: dataDecoded)
                     DispatchQueue.main.async {
                         self.addPhoto(photo: decodedimage!)
+                        self.photosCollectionView.reloadData()
                     }
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func loadProductInfo() {
+        let headers: HTTPHeaders = [
+            "Authorization":"Basic 0JHRg9C70LPQsNC60L7QsjpHcnV6UmF6Ym9yNjY="
+        ]
+        let params = ["ТипПараметра":"Штрихкод", "ЗначениеПараметра": "2000000063768"]
+        
+        apiController.getProductInfo(params: params, headers: headers) { result in
+            switch result {
+            case .success(let product):
+                let model = DetailModel(product: product, photos: [])
+                self.model = model
+                DispatchQueue.main.async {
+                    self.updateUI()
+                    self.tableView.reloadData()
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -147,21 +177,29 @@ class MainViewController: UIViewController {
 // MARK: - CollectionViewDelegate and DataSource
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        if let product = model?.product {
+            return 5
+        } else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "MainTableViewCell", for: indexPath) as! MainTableViewCell
-        cell.propertyLabel.text = property[indexPath.row]
-        switch indexPath.row {
-        case 0: cell.valueLabel.text = model?.auto
-        case 1: cell.valueLabel.text = model?.price
-        case 2: cell.valueLabel.text = model?.balance
-        case 3: cell.valueLabel.text = model?.id
-        case 4: cell.valueLabel.text = model?.vendorСode
-        default: cell.valueLabel.text = "test"
+        if let product = model?.product {
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: "MainTableViewCell", for: indexPath) as! MainTableViewCell
+            cell.propertyLabel.text = property[indexPath.row]
+            switch indexPath.row {
+            case 0: cell.valueLabel.text = product.auto
+            case 1: cell.valueLabel.text = "\(product.price)"
+            case 2: cell.valueLabel.text = "\(product.balance)"
+            case 3: cell.valueLabel.text = product.id
+            case 4: cell.valueLabel.text = product.vendorCode
+            default: cell.valueLabel.text = "test"
+            }
+            return cell
+        } else {
+            return UITableViewCell()
         }
-        return cell
     }
 }
 
@@ -220,12 +258,23 @@ extension MainViewController {
 // MARK: - CollectionViewDelegate and DataSource
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (model?.photos.count ?? 0) + 1
+//        return (model?.photos.count ?? 0) + 1
+        if let model = model {
+            return model.photos.count + 1
+        } else {
+            return 1
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let model = model else { return UICollectionViewCell() }
+        guard let model = model else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainImageAddCell", for: indexPath) as! MainImageAddCell
+            cell.addButtonDidTapped = {
+                self.presentAddPhotoActionSheet()
+            }
+            return cell
+        }
         
         if indexPath.item == model.photos.count {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainImageAddCell", for: indexPath) as! MainImageAddCell

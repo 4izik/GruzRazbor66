@@ -13,15 +13,6 @@ class APIController {
     
     static let manager: Alamofire.Session = {
         let manager = ServerTrustManager(evaluators: ["10.10.1.2": DisabledTrustEvaluator()])
-        
-        //        let configuration = URLSessionConfiguration.default
-        //        configuration.timeoutIntervalForRequest = 60
-        //
-        //        var additionalHeaders = AF.session.configuration.httpAdditionalHeaders
-        //        additionalHeaders?["Content-Type"] = "application/json"
-        //        additionalHeaders?["Accept"] = "application/json"
-        //
-        //        configuration.httpAdditionalHeaders = additionalHeaders
         let session = Session(serverTrustManager: manager)
         return session
     }()
