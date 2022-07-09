@@ -42,6 +42,11 @@ class MainViewController: UIViewController {
     @IBOutlet weak var basketButton: UIButton!
     @IBOutlet weak var photosCollectionView: UICollectionView!
     @IBOutlet weak var addPhotoViewContainer: UIView!
+    @IBOutlet weak var titleLabel: UILabel! {
+        didSet {
+            titleLabel.text = model?.product?.name ?? ""
+        }
+    }
     
     // MARK: - View LifeCycle
     
@@ -50,7 +55,6 @@ class MainViewController: UIViewController {
 //        model = setDefaultModel()
         setupUI()
         loadProductInfo()
-        loadImages()
     }
     
 //    private func setDefaultModel() -> DetailModel {
@@ -158,6 +162,8 @@ class MainViewController: UIViewController {
                 self.model = model
                 DispatchQueue.main.async {
                     self.updateUI()
+                    self.titleLabel.text = model.product?.name
+                    self.loadImages()
                     self.tableView.reloadData()
                 }
             case .failure(let error):
@@ -199,6 +205,20 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else {
             return UITableViewCell()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        switch indexPath.row {
+        case 1:
+            performSegue(withIdentifier: "Prices", sender: nil)
+            tableView.deselectRow(at: indexPath, animated: false)
+        case 2:
+            performSegue(withIdentifier: "Supplies", sender: nil)
+            tableView.deselectRow(at: indexPath, animated: false)
+        default:
+            tableView.deselectRow(at: indexPath, animated: false)
         }
     }
 }
