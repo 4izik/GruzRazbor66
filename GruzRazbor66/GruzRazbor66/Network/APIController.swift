@@ -33,35 +33,28 @@ class APIController {
             }
     }
     
-    func getProductPrices(params: [String: String], headers: HTTPHeaders? = nil, completion: @escaping ((Result<Price, NSError>) -> Void)) {
+    func getProductPrices(params: [String: String], headers: HTTPHeaders? = nil, completion: @escaping ((Result<[Price], NSError>) -> Void)) {
         APIController.manager.request((NetworkConstants.host + NetworkConstants.getSuppliersPrices), method: .get, parameters: params, headers: headers)
             .validate(statusCode: 200..<300)
-            .responseDecodable(of: PriceDto.self) { response in
+            .responseJSON { response in
                 switch response.result {
                 case .success(let dto):
-                    let model = Price(dto: dto)
-                    completion(.success(model))
+                    guard let prices = Price.getArray(from: dto) else { return }
+                    completion(.success(prices))
                 case .failure(let error):
                     completion(.failure(NSError.makeEror(description: error.localizedDescription)))
                 }
             }
     }
     
-    func getProductImages(params: [String:String], headers: HTTPHeaders? = nil, completion: @escaping ((Result<[String], NSError>) -> Void)) {
+    func getProductImages(params: [String:String], headers: HTTPHeaders? = nil, completion: @escaping ((Result<[ImageModel], NSError>) -> Void)) {
         APIController.manager.request(NetworkConstants.host + NetworkConstants.getProductPictures, method: .get, parameters: params, headers: headers)
             .validate(statusCode:200..<300)
             .responseJSON { response in
                 switch response.result {
                 case .success(let dto):
-                    if let data = dto as? [[String: String]] {
-                        var photos: [String] = []
-                        for model in data {
-                            if let photosString = model["ДанныеФайлаBase64"] {
-                                photos.append(photosString)
-                            }
-                        }
-                        completion(.success(photos))
-                    }
+                    guard let images = ImageModel.getArray(from: dto) else { return }
+                    completion(.success(images))
                 case .failure(let error):
                     completion(.failure(NSError.makeEror(description: error.localizedDescription)))
                 }

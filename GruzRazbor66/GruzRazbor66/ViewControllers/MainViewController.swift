@@ -136,7 +136,7 @@ class MainViewController: UIViewController {
             case .success(let photos):
                 print(photos.count)
                 for photo in photos {
-                    let dataDecoded : Data = Data(base64Encoded: photo, options: .ignoreUnknownCharacters)!
+                    let dataDecoded : Data = Data(base64Encoded: photo.base64String, options: .ignoreUnknownCharacters)!
                     let decodedimage = UIImage(data: dataDecoded)
                     DispatchQueue.main.async {
                         self.addPhoto(photo: decodedimage!)
@@ -171,6 +171,13 @@ class MainViewController: UIViewController {
             }
         }
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Prices" {
+            guard let product = model?.product, let vc = segue.destination as? PricesTableViewController else { return }
+            vc.vendorCode = product.vendorCode
+        }
     }
     
     // MARK: - Actions
@@ -208,7 +215,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             case 4: cell.valueLabel.text = product.vendorCode
             default: cell.valueLabel.text = "test"
             }
-            cell.selectedBackgroundView = selectedView
+//            cell.selectedBackgroundView = selectedView
             return cell
         } else {
             return UITableViewCell()
@@ -260,7 +267,7 @@ extension MainViewController {
             case .camera:
                 return item.actionAddTitle
             default:
-                return "Choose Media"
+                return "Выбрать из медиатеки"
             }
         }
         

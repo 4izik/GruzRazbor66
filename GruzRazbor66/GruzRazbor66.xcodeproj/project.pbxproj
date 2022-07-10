@@ -27,6 +27,8 @@
 		F5A6C2B02866DC85005067D9 /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6C2AF2866DC85005067D9 /* APIController.swift */; };
 		F5C8D05E286E11CB00FAD4AC /* NSErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C8D05D286E11CB00FAD4AC /* NSErrorExtension.swift */; };
 		F5C99304286A0AF900ACFA92 /* PhotoAuthCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C99303286A0AF900ACFA92 /* PhotoAuthCenter.swift */; };
+		F5D2781C287B127100DFD501 /* PricesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2781B287B127100DFD501 /* PricesTableViewController.swift */; };
+		F5D2781E287B257F00DFD501 /* PricesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2781D287B257F00DFD501 /* PricesTableViewCell.swift */; };
 		F5D382AA286CBCA1002A973A /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D382A9286CBCA1002A973A /* NetworkConstants.swift */; };
 		F5D382AC286CC6D2002A973A /* ProductDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D382AB286CC6D2002A973A /* ProductDto.swift */; };
 		F5D382AE286CCE02002A973A /* PriceDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D382AD286CCE02002A973A /* PriceDto.swift */; };
@@ -59,6 +61,8 @@
 		F5A6C2AF2866DC85005067D9 /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
 		F5C8D05D286E11CB00FAD4AC /* NSErrorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSErrorExtension.swift; sourceTree = "<group>"; };
 		F5C99303286A0AF900ACFA92 /* PhotoAuthCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAuthCenter.swift; sourceTree = "<group>"; };
+		F5D2781B287B127100DFD501 /* PricesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricesTableViewController.swift; sourceTree = "<group>"; };
+		F5D2781D287B257F00DFD501 /* PricesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricesTableViewCell.swift; sourceTree = "<group>"; };
 		F5D382A9286CBCA1002A973A /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		F5D382AB286CC6D2002A973A /* ProductDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDto.swift; sourceTree = "<group>"; };
 		F5D382AD286CCE02002A973A /* PriceDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceDto.swift; sourceTree = "<group>"; };
@@ -144,6 +148,7 @@
 			children = (
 				5D7A525B2832187400D0E21D /* MainViewController.swift */,
 				5DE36F42283C089100B191C7 /* ScanerViewController.swift */,
+				F5D2781B287B127100DFD501 /* PricesTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -176,6 +181,7 @@
 				5DA62F69283378FE00CDB318 /* MainTableViewCell.swift */,
 				5DA62F6B283384D600CDB318 /* MainImageCell.swift */,
 				F54E25D628686614006EF797 /* MainImageAddCell.swift */,
+				F5D2781D287B257F00DFD501 /* PricesTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -324,6 +330,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5D2781E287B257F00DFD501 /* PricesTableViewCell.swift in Sources */,
 				F54E25D728686614006EF797 /* MainImageAddCell.swift in Sources */,
 				F5D382AC286CC6D2002A973A /* ProductDto.swift in Sources */,
 				5DE36F43283C089100B191C7 /* ScanerViewController.swift in Sources */,
@@ -335,6 +342,7 @@
 				F588690228734D6000AA2BDF /* ImagesDto.swift in Sources */,
 				F5D382B3286CD109002A973A /* Price.swift in Sources */,
 				5D7A525C2832187400D0E21D /* MainViewController.swift in Sources */,
+				F5D2781C287B127100DFD501 /* PricesTableViewController.swift in Sources */,
 				5D7A52582832187400D0E21D /* AppDelegate.swift in Sources */,
 				F5C99304286A0AF900ACFA92 /* PhotoAuthCenter.swift in Sources */,
 				5DA62F6C283384D600CDB318 /* MainImageCell.swift in Sources */,

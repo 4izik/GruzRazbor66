@@ -28,7 +28,7 @@
             </objects>
             <point key="canvasLocation" x="443" y="228"/>
         </scene>
-        <!--Main View Controller-->
+        <!--Карточка-->
         <scene sceneID="JVz-Qv-1ZQ">
             <objects>
                 <viewController id="q9Q-Ie-H7d" customClass="MainViewController" customModule="GruzRazbor66" customModuleProvider="target" sceneMemberID="viewController">
@@ -304,7 +304,7 @@
                             <constraint firstItem="JCg-25-0L5" firstAttribute="top" secondItem="xjV-nf-nVZ" secondAttribute="bottom" constant="18" id="toj-34-Vxr"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="55i-jU-YEc"/>
+                    <navigationItem key="navigationItem" title="Карточка" id="55i-jU-YEc"/>
                     <connections>
                         <outlet property="addPhotoViewContainer" destination="esX-VE-SWC" id="5hc-S3-ewn"/>
                         <outlet property="basketButton" destination="fCf-I0-ybH" id="sZl-dv-8Pw"/>
@@ -353,41 +353,79 @@
         <!--Цены конкурентов-->
         <scene sceneID="X65-p6-GLa">
             <objects>
-                <tableViewController modalPresentationStyle="fullScreen" id="g5M-Bw-9dT" sceneMemberID="viewController">
+                <tableViewController modalPresentationStyle="fullScreen" id="g5M-Bw-9dT" customClass="PricesTableViewController" customModule="GruzRazbor66" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="1Kf-Id-v2q">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="gyC-Tb-QbL">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="71.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Prices" rowHeight="88" id="gyC-Tb-QbL" customClass="PricesTableViewCell" customModule="GruzRazbor66" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="88"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gyC-Tb-QbL" id="X1B-v9-p5z">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="71.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="88"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Цена" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HNr-Gf-pc7">
-                                            <rect key="frame" x="36" y="27" width="35" height="17.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4550,0" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KeD-50-CYb">
+                                            <rect key="frame" x="345" y="35" width="49" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4550,0" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KeD-50-CYb">
-                                            <rect key="frame" x="343" y="16" width="55" height="39.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ao6-zE-b1h">
+                                            <rect key="frame" x="16" y="14" width="95" height="60"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Наименование" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nSm-ad-3v6">
+                                                    <rect key="frame" x="0.0" y="0.0" width="95" height="13.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Цена" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HNr-Gf-pc7">
+                                                    <rect key="frame" x="0.0" y="23.5" width="32.5" height="13"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Поставщик" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uBy-n2-QiS">
+                                                    <rect key="frame" x="0.0" y="46.5" width="71" height="13.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Кран ЗИЛ,КАМАЗ,МАЗ стояночного тормоза 3-х выводной" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxk-AN-wC5">
+                                            <rect key="frame" x="120" y="8.5" width="274" height="24"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="АвтоАльянс" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VJi-cK-FLw">
+                                            <rect key="frame" x="315" y="58.5" width="84" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="HNr-Gf-pc7" firstAttribute="top" secondItem="X1B-v9-p5z" secondAttribute="topMargin" constant="16" id="CiU-zv-DnE"/>
-                                        <constraint firstItem="HNr-Gf-pc7" firstAttribute="leading" secondItem="X1B-v9-p5z" secondAttribute="leadingMargin" constant="16" id="Gfa-qH-06j"/>
-                                        <constraint firstItem="KeD-50-CYb" firstAttribute="top" secondItem="X1B-v9-p5z" secondAttribute="top" constant="16" id="Trr-Qd-6hp"/>
-                                        <constraint firstAttribute="trailing" secondItem="KeD-50-CYb" secondAttribute="trailing" constant="16" id="n31-CZ-Z5z"/>
-                                        <constraint firstAttribute="bottom" secondItem="KeD-50-CYb" secondAttribute="bottom" constant="16" id="oci-8B-RNq"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="HNr-Gf-pc7" secondAttribute="bottom" constant="16" id="xJK-zC-u5v"/>
+                                        <constraint firstAttribute="trailing" secondItem="dxk-AN-wC5" secondAttribute="trailing" constant="20" id="05v-g4-joK"/>
+                                        <constraint firstItem="Ao6-zE-b1h" firstAttribute="leading" secondItem="X1B-v9-p5z" secondAttribute="leading" constant="16" id="751-gQ-dWf"/>
+                                        <constraint firstItem="VJi-cK-FLw" firstAttribute="centerY" secondItem="uBy-n2-QiS" secondAttribute="centerY" id="NJ6-1s-QXQ"/>
+                                        <constraint firstAttribute="trailing" secondItem="VJi-cK-FLw" secondAttribute="trailing" constant="15" id="Nbg-xu-vFZ"/>
+                                        <constraint firstItem="dxk-AN-wC5" firstAttribute="centerY" secondItem="nSm-ad-3v6" secondAttribute="centerY" id="aRQ-62-yow"/>
+                                        <constraint firstItem="KeD-50-CYb" firstAttribute="centerY" secondItem="HNr-Gf-pc7" secondAttribute="centerY" id="cOd-k3-sP3"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="KeD-50-CYb" secondAttribute="trailing" id="e9y-sA-qRt"/>
+                                        <constraint firstAttribute="bottom" secondItem="Ao6-zE-b1h" secondAttribute="bottom" constant="14" id="fV8-8j-1U6"/>
+                                        <constraint firstItem="dxk-AN-wC5" firstAttribute="leading" secondItem="X1B-v9-p5z" secondAttribute="leading" constant="120" id="obY-Ea-0NU"/>
+                                        <constraint firstItem="Ao6-zE-b1h" firstAttribute="top" secondItem="X1B-v9-p5z" secondAttribute="top" constant="14" id="sJ7-OH-Z1t"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="dxk-AN-wC5" id="vjt-Pn-ZPd"/>
+                                    <outlet property="priceLabel" destination="KeD-50-CYb" id="kVt-9z-ivz"/>
+                                    <outlet property="vendorLabel" destination="VJi-cK-FLw" id="c1M-YR-niH"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -432,6 +470,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TJg-vF-GRu">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.27450980392156865" green="0.32549019607843138" blue="0.38039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

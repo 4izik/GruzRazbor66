@@ -15,10 +15,20 @@ struct ImageModel {
 }
 
 extension ImageModel {
-    init(dto: ImagesDto) {
-        self.id = dto.id ?? ""
-        self.name = dto.name ?? ""
-        self.fileType = dto.fileType ?? ""
-        self.base64String = dto.base64String ?? ""
+    init?(dto: [String: String]) {
+        guard let id = dto["ИдентификаторИзображения"],
+              let name = dto["ИмяФайла"],
+              let fileType = dto["РасширениеФайла"],
+              let base64String = dto["ДанныеФайлаBase64"] else { return nil }
+                
+        self.id = id
+        self.name = name
+        self.fileType = fileType
+        self.base64String = base64String
+    }
+    
+    static func getArray(from jsonArray: Any) -> [ImageModel]? {
+        guard let jsonArray = jsonArray as? Array<[String: String]> else { return nil}
+        return jsonArray.compactMap {ImageModel.init(dto: $0)}
     }
 }
