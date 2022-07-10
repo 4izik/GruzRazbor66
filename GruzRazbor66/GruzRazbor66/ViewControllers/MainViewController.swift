@@ -183,7 +183,7 @@ class MainViewController: UIViewController {
 // MARK: - CollectionViewDelegate and DataSource
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let product = model?.product {
+        if let _ = model?.product {
             return 5
         } else {
             return 0
@@ -191,17 +191,24 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let selectedView = UIView.init()
+        selectedView.backgroundColor = .clear
         if let product = model?.product {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: "MainTableViewCell", for: indexPath) as! MainTableViewCell
             cell.propertyLabel.text = property[indexPath.row]
             switch indexPath.row {
             case 0: cell.valueLabel.text = product.auto
-            case 1: cell.valueLabel.text = "\(product.price)"
-            case 2: cell.valueLabel.text = "\(product.balance)"
+            case 1:
+                cell.valueLabel.text = "\(product.price)"
+                cell.accessoryType = .disclosureIndicator
+            case 2:
+                cell.valueLabel.text = "\(product.balance)"
+                cell.accessoryType = .disclosureIndicator
             case 3: cell.valueLabel.text = product.id
             case 4: cell.valueLabel.text = product.vendorCode
             default: cell.valueLabel.text = "test"
             }
+            cell.selectedBackgroundView = selectedView
             return cell
         } else {
             return UITableViewCell()
