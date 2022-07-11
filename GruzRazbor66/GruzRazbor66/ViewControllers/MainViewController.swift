@@ -8,6 +8,7 @@
 import UIKit
 import Agrume
 import PhotosUI
+import Alamofire
 
 class MainViewController: UIViewController {
     // MARK: - Properties
@@ -15,7 +16,7 @@ class MainViewController: UIViewController {
     private var model: DetailModel?
     private var selectedImage: Int?
     private var item: ImageCellAddType = .photo
-    
+    private let apiController = APIController.shared
     private lazy var imagePickerController: UIImagePickerController = {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
@@ -41,20 +42,26 @@ class MainViewController: UIViewController {
     @IBOutlet weak var basketButton: UIButton!
     @IBOutlet weak var photosCollectionView: UICollectionView!
     @IBOutlet weak var addPhotoViewContainer: UIView!
+    @IBOutlet weak var titleLabel: UILabel! {
+        didSet {
+            titleLabel.text = model?.product?.name ?? ""
+        }
+    }
     
     // MARK: - View LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        model = setDefaultModel()
+//        model = setDefaultModel()
         setupUI()
+        loadProductInfo()
     }
     
-    private func setDefaultModel() -> DetailModel {
-        let detail = DetailModel(auto: "МАЗ-6430А8-370-011 Тяг...", price: "3 000,00", balance: "5", id: "00001673", vendorCode: "5430-3101012")
-        //        detail.addPhotos(photos: [UIImage(named: "Rectangle1")!, UIImage(named: "Rectangle2")!])
-        return detail
-    }
+//    private func setDefaultModel() -> DetailModel {
+////        let detail = DetailModel(auto: "МАЗ-6430А8-370-011 Тяг...", price: "3 000,00", balance: "5", id: "00001673", vendorCode: "5430-3101012")
+//        //        detail.addPhotos(photos: [UIImage(named: "Rectangle1")!, UIImage(named: "Rectangle2")!])
+////        return detail
+//    }
     
     func setupUI() {
         guard let model = model else { return }
@@ -94,17 +101,83 @@ class MainViewController: UIViewController {
     }
     
     private func updateUI() {
-        if !(model?.photos.isEmpty ?? true) {
+//        if !(model?.photos.isEmpty ?? true) {
+//            addPhotoViewContainer.isHidden = true
+//            photosCollectionView.isHidden = false
+//        }
+        if let model = model, model.photos.isEmpty {
             addPhotoViewContainer.isHidden = true
             photosCollectionView.isHidden = false
+        } else {
+            photosCollectionView.isHidden = true
+            addPhotoViewContainer.isHidden = false
         }
     }
     
     private func addPhoto(photo: UIImage) {
-        guard let model = model else { return }
+        guard var model = model else { return }
         model.photos.append(photo)
-        updateUI()
         photosCollectionView.reloadData()
+        updateUI()
+    }
+    
+    private func loadImages() {
+        let params = ["НоменклатураИдентификатор":"5dbb89b8-d027-11ec-9740-002655e90aec"]
+        let userName = "Булгаков"
+        let password = "GruzGrazbor66"
+        let base64encoded = "\(userName):\(password)".data(using: .utf8)?.base64EncodedString() ?? ""
+//        let base64encoded = "\(userName):\(password)".encodeBase64()
+        let headers: HTTPHeaders = [
+            "Authorization":"Basic 0JHRg9C70LPQsNC60L7QsjpHcnV6UmF6Ym9yNjY="
+        ]
+        
+        apiController.getProductImages(params: params, headers: headers) { result in
+            switch result {
+            case .success(let photos):
+                print(photos.count)
+                for photo in photos {
+                    let dataDecoded : Data = Data(base64Encoded: photo.base64String, options: .ignoreUnknownCharacters)!
+                    let decodedimage = UIImage(data: dataDecoded)
+                    DispatchQueue.main.async {
+                        self.addPhoto(photo: decodedimage!)
+                        self.photosCollectionView.reloadData()
+                    }
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func loadProductInfo() {
+        let headers: HTTPHeaders = [
+            "Authorization":"Basic 0JHRg9C70LPQsNC60L7QsjpHcnV6UmF6Ym9yNjY="
+        ]
+        let params = ["ТипПараметра":"Штрихкод", "ЗначениеПараметра": "2000000063768"]
+        
+        apiController.getProductInfo(params: params, headers: headers) { result in
+            switch result {
+            case .success(let product):
+                let model = DetailModel(product: product, photos: [])
+                self.model = model
+                DispatchQueue.main.async {
+                    self.updateUI()
+                    self.titleLabel.text = model.product?.name
+                    self.loadImages()
+                    self.tableView.reloadData()
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Prices" {
+            guard let product = model?.product, let vc = segue.destination as? PricesTableViewController else { return }
+            vc.vendorCode = product.vendorCode
+        }
     }
     
     // MARK: - Actions
@@ -117,21 +190,50 @@ class MainViewController: UIViewController {
 // MARK: - CollectionViewDelegate and DataSource
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        if let _ = model?.product {
+            return 5
+        } else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "MainTableViewCell", for: indexPath) as! MainTableViewCell
-        cell.propertyLabel.text = property[indexPath.row]
-        switch indexPath.row {
-        case 0: cell.valueLabel.text = model?.auto
-        case 1: cell.valueLabel.text = model?.price
-        case 2: cell.valueLabel.text = model?.balance
-        case 3: cell.valueLabel.text = model?.id
-        case 4: cell.valueLabel.text = model?.vendorСode
-        default: cell.valueLabel.text = "test"
+        let selectedView = UIView.init()
+        selectedView.backgroundColor = .clear
+        if let product = model?.product {
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: "MainTableViewCell", for: indexPath) as! MainTableViewCell
+            cell.propertyLabel.text = property[indexPath.row]
+            switch indexPath.row {
+            case 0: cell.valueLabel.text = product.auto
+            case 1:
+                cell.valueLabel.text = "\(product.price)"
+                cell.accessoryType = .disclosureIndicator
+            case 2:
+                cell.valueLabel.text = "\(product.balance)"
+                cell.accessoryType = .disclosureIndicator
+            case 3: cell.valueLabel.text = product.id
+            case 4: cell.valueLabel.text = product.vendorCode
+            default: cell.valueLabel.text = "test"
+            }
+//            cell.selectedBackgroundView = selectedView
+            return cell
+        } else {
+            return UITableViewCell()
         }
-        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        switch indexPath.row {
+        case 1:
+            performSegue(withIdentifier: "Prices", sender: nil)
+            tableView.deselectRow(at: indexPath, animated: false)
+        case 2:
+            performSegue(withIdentifier: "Supplies", sender: nil)
+            tableView.deselectRow(at: indexPath, animated: false)
+        default:
+            tableView.deselectRow(at: indexPath, animated: false)
+        }
     }
 }
 
@@ -165,7 +267,7 @@ extension MainViewController {
             case .camera:
                 return item.actionAddTitle
             default:
-                return "Choose Media"
+                return "Выбрать из медиатеки"
             }
         }
         
@@ -190,12 +292,23 @@ extension MainViewController {
 // MARK: - CollectionViewDelegate and DataSource
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (model?.photos.count ?? 0) + 1
+//        return (model?.photos.count ?? 0) + 1
+        if let model = model {
+            return model.photos.count + 1
+        } else {
+            return 1
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let model = model else { return UICollectionViewCell() }
+        guard let model = model else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainImageAddCell", for: indexPath) as! MainImageAddCell
+            cell.addButtonDidTapped = {
+                self.presentAddPhotoActionSheet()
+            }
+            return cell
+        }
         
         if indexPath.item == model.photos.count {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainImageAddCell", for: indexPath) as! MainImageAddCell
