@@ -9,13 +9,15 @@ import UIKit
 import AVFoundation
 
 class ScanerViewController: UIViewController {
+    // MARK: - Properties
+    
     var video = AVCaptureVideoPreviewLayer()
     let session = AVCaptureSession()
-    
+        
+    // MARK: - Vivew LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         startRunning()
-        // Do any additional setup after loading the view.
     }
 
     func setupVideo() {
@@ -41,6 +43,7 @@ class ScanerViewController: UIViewController {
         view.layer.addSublayer(video)
         session.startRunning()
     }
+    
 }
 
 extension ScanerViewController: AVCaptureMetadataOutputObjectsDelegate {
@@ -49,13 +52,21 @@ extension ScanerViewController: AVCaptureMetadataOutputObjectsDelegate {
         if let object = metadataObjects.first as? AVMetadataMachineReadableCodeObject {
             if object.type == AVMetadataObject.ObjectType.qr {
                 let alert = UIAlertController(title: "QR Code", message: object.stringValue, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Перейти", style: .default, handler: { _ in
-                    print(object.stringValue)
+                alert.addAction(UIAlertAction(title: "Перейти", style: .default, handler: { [weak self] _ in
+                    if let vendorCode = object.stringValue {
+                        DispatchQueue.main.async { [weak self] in
+                            let navigationVC = self?.tabBarController?.viewControllers?[0] as! UINavigationController
+                            let mainVC = navigationVC.topViewController as! MainViewController
+                            mainVC.codeFromScanner = vendorCode
+                            self?.tabBarController?.selectedIndex = 0
+                            
+                        }
+                    }
                 }))
-                alert.addAction(UIAlertAction(title: "Копировать", style: .default, handler: { _ in
+                alert.addAction(UIAlertAction(title: "Копировать", style: .default, handler: { [weak self] _ in
                     UIPasteboard.general.string = object.stringValue
-                    self.view.layer.sublayers?.removeLast()
-                    self.session.stopRunning()
+                    self?.view.layer.sublayers?.removeLast()
+                    self?.session.stopRunning()
                 }))
                 present(alert, animated: true, completion: nil)
             }

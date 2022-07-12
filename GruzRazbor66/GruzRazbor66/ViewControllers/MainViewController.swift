@@ -14,6 +14,11 @@ class MainViewController: UIViewController {
     // MARK: - Properties
     let property = ["Автомобиль","Цена","Остаток","Код","Артикул"]
     private var model: DetailModel?
+    var codeFromScanner = "" {
+        didSet {
+            searchBar.text = codeFromScanner
+        }
+    }
     private var selectedImage: Int?
     private var item: ImageCellAddType = .photo
     private let apiController = APIController.shared
@@ -184,6 +189,9 @@ class MainViewController: UIViewController {
     @IBAction func addPhotoDidTapped(_ sender: UIButton) {
         presentAddPhotoActionSheet()
     }
+    @IBAction func scanerButtonDidTapped(_ sender: Any) {
+        self.tabBarController?.selectedIndex = 1
+    }
 }
 
 
@@ -215,7 +223,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             case 4: cell.valueLabel.text = product.vendorCode
             default: cell.valueLabel.text = "test"
             }
-//            cell.selectedBackgroundView = selectedView
+            cell.selectedBackgroundView = selectedView
             return cell
         } else {
             return UITableViewCell()

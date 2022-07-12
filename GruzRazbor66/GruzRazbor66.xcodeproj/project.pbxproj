@@ -506,6 +506,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GruzRazbor66/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Приложению требуется доступ к камере для сканера qr-кода";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Пожалуйста предоставьте доступ к библиотеке фото";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -516,7 +517,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gruzrapbor66.bobermiha;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gruzrapbor66;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -536,6 +537,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GruzRazbor66/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Приложению требуется доступ к камере для сканера qr-кода";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Пожалуйста предоставьте доступ к библиотеке фото";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -546,7 +548,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gruzrapbor66.bobermiha;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gruzrapbor66;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
