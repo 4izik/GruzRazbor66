@@ -126,6 +126,12 @@ class MainViewController: UIViewController {
         updateUI()
     }
     
+    private func addPhotos(photos: [UIImage]) {
+        model?.photos += photos
+        photosCollectionView.reloadData()
+        //updateUI()
+    }
+    
     private func loadImages() {
         let params = ["НоменклатураИдентификатор":"5dbb89b8-d027-11ec-9740-002655e90aec"]
         let userName = "Булгаков"
@@ -137,16 +143,18 @@ class MainViewController: UIViewController {
         ]
         
         apiController.getProductImages(params: params, headers: headers) { result in
+            var images: [UIImage] = []
             switch result {
             case .success(let photos):
                 print(photos.count)
                 for photo in photos {
                     let dataDecoded : Data = Data(base64Encoded: photo.base64String, options: .ignoreUnknownCharacters)!
                     let decodedimage = UIImage(data: dataDecoded)
-                    DispatchQueue.main.async {
-                        self.addPhoto(photo: decodedimage!)
-                        self.photosCollectionView.reloadData()
-                    }
+                    images.append(decodedimage!)
+                }
+                DispatchQueue.main.async {
+                    self.addPhotos(photos: images)
+                    //self.photosCollectionView.reloadData()
                 }
             case .failure(let error):
                 print(error.localizedDescription)
