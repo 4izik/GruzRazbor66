@@ -61,4 +61,16 @@ class APIController {
             }
     }
     
+    func testSecureConnection(params: [String: String], headers: HTTPHeaders, completion: @escaping ((Result<Bool, NSError>) -> Void)) {
+        APIController.manager.request(NetworkConstants.host + NetworkConstants.testSecureConnection, method: .get, parameters: params, headers: headers)
+            .response { response in
+                switch response.result {
+                case .success(_):
+                    completion(.success(true))
+                case .failure(let error):
+                    completion(.failure(NSError.makeEror(description: error.localizedDescription)))
+                }
+            }
+    }
+    
 }

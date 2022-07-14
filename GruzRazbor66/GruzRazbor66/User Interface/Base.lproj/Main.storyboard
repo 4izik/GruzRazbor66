@@ -28,10 +28,10 @@
             </objects>
             <point key="canvasLocation" x="443" y="228"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="mEF-zQ-ClC">
             <objects>
-                <viewController id="2xR-9x-J4j" sceneMemberID="viewController">
+                <viewController id="2xR-9x-J4j" customClass="SettingsViewController" customModule="GruzRazbor66" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iHk-hG-khh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -88,6 +88,9 @@
                                                     </label>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t5U-Fz-mVX">
                                                         <rect key="frame" x="333" y="0.0" width="51" height="34"/>
+                                                        <connections>
+                                                            <action selector="secureSwitchDidTapped:" destination="2xR-9x-J4j" eventType="valueChanged" id="YTV-JL-7Af"/>
+                                                        </connections>
                                                     </switch>
                                                 </subviews>
                                             </stackView>
@@ -111,6 +114,9 @@
                                                         <integer key="value" value="6"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="connectDidTapped:" destination="2xR-9x-J4j" eventType="touchUpInside" id="QcQ-Zq-pl5"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Подключено" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMV-Uo-KHX">
                                                 <rect key="frame" x="0.0" y="73" width="382" height="48"/>
@@ -141,6 +147,9 @@
                                                         <integer key="value" value="6"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="disconnectButtonDidTaped:" destination="2xR-9x-J4j" eventType="touchUpInside" id="JVe-KC-6Kh"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -156,6 +165,15 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="settingsTabIcon" selectedImage="settingsTabIcon" id="ZgJ-x8-Xv7"/>
+                    <connections>
+                        <outlet property="connectButton" destination="f89-bd-WCB" id="fHC-4u-DkA"/>
+                        <outlet property="connectedLabel" destination="lMV-Uo-KHX" id="Cpt-Iy-o5E"/>
+                        <outlet property="disconnectButton" destination="Zsu-Hn-Zgz" id="PDy-pJ-4gD"/>
+                        <outlet property="loginTF" destination="3ty-f6-ykC" id="rWC-Xq-Cma"/>
+                        <outlet property="passwordTF" destination="nVU-wQ-egp" id="Ste-CP-VUu"/>
+                        <outlet property="secureConnectionSwitch" destination="t5U-Fz-mVX" id="ISX-7u-k3f"/>
+                        <outlet property="serverAdressTF" destination="pLL-1Z-xpZ" id="Vap-GO-LPh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="szR-vN-tgB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

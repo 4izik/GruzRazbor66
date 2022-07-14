@@ -21,6 +21,7 @@
 		75904AD33D7F1B195291F8CE /* Pods_GruzRazbor66.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75DCA88215F6A92E97E056A6 /* Pods_GruzRazbor66.framework */; };
 		F54E25D728686614006EF797 /* MainImageAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54E25D628686614006EF797 /* MainImageAddCell.swift */; };
 		F54E25D9286866B7006EF797 /* ImageCellAddType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54E25D8286866B7006EF797 /* ImageCellAddType.swift */; };
+		F56BC5ED28808493006D1A5F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56BC5EC28808493006D1A5F /* SettingsViewController.swift */; };
 		F58869002873497D00AA2BDF /* String+base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58868FF2873497D00AA2BDF /* String+base64.swift */; };
 		F588690228734D6000AA2BDF /* ImagesDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588690128734D6000AA2BDF /* ImagesDto.swift */; };
 		F588690428734FF700AA2BDF /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588690328734FF700AA2BDF /* Image.swift */; };
@@ -55,6 +56,7 @@
 		AB041AD96148998CF4A8101B /* Pods-GruzRazbor66.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GruzRazbor66.debug.xcconfig"; path = "Target Support Files/Pods-GruzRazbor66/Pods-GruzRazbor66.debug.xcconfig"; sourceTree = "<group>"; };
 		F54E25D628686614006EF797 /* MainImageAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainImageAddCell.swift; sourceTree = "<group>"; };
 		F54E25D8286866B7006EF797 /* ImageCellAddType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellAddType.swift; sourceTree = "<group>"; };
+		F56BC5EC28808493006D1A5F /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		F58868FF2873497D00AA2BDF /* String+base64.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+base64.swift"; sourceTree = "<group>"; };
 		F588690128734D6000AA2BDF /* ImagesDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesDto.swift; sourceTree = "<group>"; };
 		F588690328734FF700AA2BDF /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				5D7A525B2832187400D0E21D /* MainViewController.swift */,
 				5DE36F42283C089100B191C7 /* ScanerViewController.swift */,
 				F5D2781B287B127100DFD501 /* PricesTableViewController.swift */,
+				F56BC5EC28808493006D1A5F /* SettingsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				F54E25D9286866B7006EF797 /* ImageCellAddType.swift in Sources */,
 				F5D382AE286CCE02002A973A /* PriceDto.swift in Sources */,
 				F5A6C2B02866DC85005067D9 /* APIController.swift in Sources */,
+				F56BC5ED28808493006D1A5F /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

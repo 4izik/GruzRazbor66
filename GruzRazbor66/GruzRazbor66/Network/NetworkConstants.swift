@@ -19,4 +19,5 @@ struct NetworkConstants {
     static let setupLoadToAvito = "/setuploadtoavito"
     static let setPicture = "/setpicture"
     static let createSale = "/createsale"
+    static let testSecureConnection = "/testconnection"
 }
