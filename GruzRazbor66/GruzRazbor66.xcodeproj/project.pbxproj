@@ -26,6 +26,7 @@
 		F588690228734D6000AA2BDF /* ImagesDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588690128734D6000AA2BDF /* ImagesDto.swift */; };
 		F588690428734FF700AA2BDF /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588690328734FF700AA2BDF /* Image.swift */; };
 		F5A6C2B02866DC85005067D9 /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6C2AF2866DC85005067D9 /* APIController.swift */; };
+		F5AB05F5288324160013436A /* UIView+animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AB05F4288324160013436A /* UIView+animations.swift */; };
 		F5C8D05E286E11CB00FAD4AC /* NSErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C8D05D286E11CB00FAD4AC /* NSErrorExtension.swift */; };
 		F5C99304286A0AF900ACFA92 /* PhotoAuthCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C99303286A0AF900ACFA92 /* PhotoAuthCenter.swift */; };
 		F5D2781C287B127100DFD501 /* PricesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2781B287B127100DFD501 /* PricesTableViewController.swift */; };
@@ -61,6 +62,7 @@
 		F588690128734D6000AA2BDF /* ImagesDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesDto.swift; sourceTree = "<group>"; };
 		F588690328734FF700AA2BDF /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		F5A6C2AF2866DC85005067D9 /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
+		F5AB05F4288324160013436A /* UIView+animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+animations.swift"; sourceTree = "<group>"; };
 		F5C8D05D286E11CB00FAD4AC /* NSErrorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSErrorExtension.swift; sourceTree = "<group>"; };
 		F5C99303286A0AF900ACFA92 /* PhotoAuthCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAuthCenter.swift; sourceTree = "<group>"; };
 		F5D2781B287B127100DFD501 /* PricesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricesTableViewController.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				F5C99303286A0AF900ACFA92 /* PhotoAuthCenter.swift */,
 				F5C8D05D286E11CB00FAD4AC /* NSErrorExtension.swift */,
 				F58868FF2873497D00AA2BDF /* String+base64.swift */,
+				F5AB05F4288324160013436A /* UIView+animations.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				F5D2781C287B127100DFD501 /* PricesTableViewController.swift in Sources */,
 				5D7A52582832187400D0E21D /* AppDelegate.swift in Sources */,
 				F5C99304286A0AF900ACFA92 /* PhotoAuthCenter.swift in Sources */,
+				F5AB05F5288324160013436A /* UIView+animations.swift in Sources */,
 				5DA62F6C283384D600CDB318 /* MainImageCell.swift in Sources */,
 				F5D382B1286CCFA6002A973A /* Product.swift in Sources */,
 				5DA62F6A283378FE00CDB318 /* MainTableViewCell.swift in Sources */,

@@ -61,11 +61,15 @@ class APIController {
             }
     }
     
-    func testSecureConnection(params: [String: String], headers: HTTPHeaders, completion: @escaping ((Result<Bool, NSError>) -> Void)) {
-        APIController.manager.request(NetworkConstants.host + NetworkConstants.testSecureConnection, method: .get, parameters: params, headers: headers)
+    func testSecureConnection(headers: HTTPHeaders, completion: @escaping ((Result<Bool, NSError>) -> Void)) {
+        APIController.manager.request(NetworkConstants.host + NetworkConstants.testSecureConnection, method: .get, headers: headers)
             .response { response in
                 switch response.result {
                 case .success(_):
+                    if response.response?.statusCode == 401 {
+                        completion(.failure(NSError.makeEror(description: "Ошибка авторизации")))
+                        return
+                    }
                     completion(.success(true))
                 case .failure(let error):
                     completion(.failure(NSError.makeEror(description: error.localizedDescription)))

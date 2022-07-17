@@ -62,12 +62,6 @@ class MainViewController: UIViewController {
         loadProductInfo()
     }
     
-//    private func setDefaultModel() -> DetailModel {
-////        let detail = DetailModel(auto: "МАЗ-6430А8-370-011 Тяг...", price: "3 000,00", balance: "5", id: "00001673", vendorCode: "5430-3101012")
-//        //        detail.addPhotos(photos: [UIImage(named: "Rectangle1")!, UIImage(named: "Rectangle2")!])
-////        return detail
-//    }
-    
     func setupUI() {
         guard let model = model else { return }
         
