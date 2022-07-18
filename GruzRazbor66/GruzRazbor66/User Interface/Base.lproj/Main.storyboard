@@ -37,7 +37,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="Du1-TL-bPk">
-                                <rect key="frame" x="16" y="79" width="382" height="232"/>
+                                <rect key="frame" x="16" y="312.5" width="382" height="232"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cpY-0a-Wbj">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="43"/>
@@ -138,16 +138,19 @@
                         <constraints>
                             <constraint firstItem="Du1-TL-bPk" firstAttribute="leading" secondItem="jgZ-0a-fIV" secondAttribute="leading" constant="16" id="X3F-Ej-qoA"/>
                             <constraint firstItem="jgZ-0a-fIV" firstAttribute="trailing" secondItem="Du1-TL-bPk" secondAttribute="trailing" constant="16" id="XOQ-61-gBT"/>
-                            <constraint firstItem="Du1-TL-bPk" firstAttribute="top" secondItem="jgZ-0a-fIV" secondAttribute="top" constant="35" id="prK-xX-f4R"/>
+                            <constraint firstItem="Du1-TL-bPk" firstAttribute="centerY" secondItem="jgZ-0a-fIV" secondAttribute="centerY" id="bHr-rd-ZiQ"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="settingsTabIcon" selectedImage="settingsTabIcon" id="ZgJ-x8-Xv7"/>
                     <connections>
                         <outlet property="connectButton" destination="f89-bd-WCB" id="fHC-4u-DkA"/>
+                        <outlet property="connectTo1CLabel" destination="d2C-Ta-GBh" id="vCB-eM-CDt"/>
                         <outlet property="connectedLabel" destination="lMV-Uo-KHX" id="Cpt-Iy-o5E"/>
                         <outlet property="disconnectButton" destination="Zsu-Hn-Zgz" id="PDy-pJ-4gD"/>
                         <outlet property="loginTF" destination="3ty-f6-ykC" id="rWC-Xq-Cma"/>
                         <outlet property="passwordTF" destination="nVU-wQ-egp" id="Ste-CP-VUu"/>
+                        <outlet property="secondLabel" destination="ioV-11-j3E" id="1OC-tK-5Ta"/>
+                        <outlet property="textFieldsStackView" destination="DiY-5x-mej" id="XPs-VR-V08"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="szR-vN-tgB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

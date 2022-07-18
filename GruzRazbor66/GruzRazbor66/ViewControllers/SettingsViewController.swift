@@ -18,15 +18,19 @@ class SettingsViewController: UIViewController, ValidationDelegate {
     private let validator = Validator()
     
     // MARK: - IBOutlets
+    @IBOutlet weak var connectTo1CLabel: UILabel!
+    @IBOutlet weak var secondLabel: UILabel!
     @IBOutlet weak var loginTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var connectButton: UIButton!
     @IBOutlet weak var connectedLabel: UILabel!
     @IBOutlet weak var disconnectButton: UIButton!
+    @IBOutlet weak var textFieldsStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupValidator()
+        updateUI(isConnected: UserDefaults.standard.bool(forKey: "isLoggedIn"))
     }
     
     private func setupValidator() {
@@ -45,6 +49,7 @@ class SettingsViewController: UIViewController, ValidationDelegate {
             case .success(_):
                 UserDefaults.standard.set(strBase64, forKey: "loginAndPass")
                 UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                UserDefaults.standard.set(login, forKey: "login")
                 DispatchQueue.main.async {
                     self.updateUI(isConnected: true)
                 }
@@ -61,6 +66,13 @@ class SettingsViewController: UIViewController, ValidationDelegate {
         connectedLabel.isHidden = !isConnected
         connectButton.isHidden = !connectedLabel.isHidden
         disconnectButton.isHidden = !connectButton.isHidden
+        textFieldsStackView.isHidden = !disconnectButton.isHidden
+        secondLabel.isHidden = textFieldsStackView.isHidden
+        if let login = UserDefaults.standard.string(forKey: "login") {
+            connectTo1CLabel.text = "Пользователь - \(login)"
+        } else {
+            connectTo1CLabel.text = "Подключение к 1С"
+        }
     }
     
     @IBAction func connectDidTapped(_ sender: Any) {
@@ -68,10 +80,11 @@ class SettingsViewController: UIViewController, ValidationDelegate {
     }
     
     @IBAction func disconnectButtonDidTaped(_ sender: Any) {
-        updateUI(isConnected: false)
-        self.view.makeToast("Successfully disconnected")
         UserDefaults.standard.set("", forKey: "loginAndPass")
         UserDefaults.standard.set(false, forKey: "isLoggedIn")
+        UserDefaults.standard.set(nil, forKey: "login")
+        updateUI(isConnected: false)
+        self.view.makeToast("Успешный выход", duration: 3.0, position: .center)
     }
     
 }
