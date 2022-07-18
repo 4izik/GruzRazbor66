@@ -9,6 +9,7 @@ import UIKit
 import Agrume
 import PhotosUI
 import Alamofire
+import Toast_Swift
 
 class MainViewController: UIViewController {
     // MARK: - Properties
@@ -42,7 +43,6 @@ class MainViewController: UIViewController {
     // MARK: - IBOutlets
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var scanerButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var basketButton: UIButton!
     @IBOutlet weak var photosCollectionView: UICollectionView!
@@ -57,17 +57,12 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        model = setDefaultModel()
         setupUI()
         loadProductInfo()
     }
     
     func setupUI() {
         guard let model = model else { return }
-        
-        scanerButton.layer.cornerRadius = 6
-        scanerButton.clipsToBounds = true
-        scanerButton.setTitle("", for: .normal)
         customizeSearchField()
         
         basketButton.clipsToBounds = true
@@ -100,16 +95,12 @@ class MainViewController: UIViewController {
     }
     
     private func updateUI() {
-//        if !(model?.photos.isEmpty ?? true) {
-//            addPhotoViewContainer.isHidden = true
-//            photosCollectionView.isHidden = false
-//        }
         if let model = model, model.photos.isEmpty {
-            addPhotoViewContainer.isHidden = true
-            photosCollectionView.isHidden = false
-        } else {
-            photosCollectionView.isHidden = true
             addPhotoViewContainer.isHidden = false
+            photosCollectionView.isHidden = true
+        } else {
+            photosCollectionView.isHidden = false
+            addPhotoViewContainer.isHidden = true
         }
     }
     
@@ -123,20 +114,14 @@ class MainViewController: UIViewController {
     private func addPhotos(photos: [UIImage]) {
         model?.photos += photos
         photosCollectionView.reloadData()
-        //updateUI()
+        updateUI()
     }
     
     private func loadImages() {
+        self.addPhotoViewContainer.makeToastActivity(.center)
         let params = ["НоменклатураИдентификатор":"5dbb89b8-d027-11ec-9740-002655e90aec"]
-        let userName = "Булгаков"
-        let password = "GruzGrazbor66"
-        let base64encoded = "\(userName):\(password)".data(using: .utf8)?.base64EncodedString() ?? ""
-//        let base64encoded = "\(userName):\(password)".encodeBase64()
-        let headers: HTTPHeaders = [
-            "Authorization":"Basic 0JHRg9C70LPQsNC60L7QsjpHcnV6UmF6Ym9yNjY="
-        ]
-        
-        apiController.getProductImages(params: params, headers: headers) { result in
+        apiController.getProductImages(params: params) { result in
+            self.addPhotoViewContainer.hideToastActivity()
             var images: [UIImage] = []
             switch result {
             case .success(let photos):
@@ -148,7 +133,6 @@ class MainViewController: UIViewController {
                 }
                 DispatchQueue.main.async {
                     self.addPhotos(photos: images)
-                    //self.photosCollectionView.reloadData()
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -157,12 +141,10 @@ class MainViewController: UIViewController {
     }
     
     private func loadProductInfo() {
-        let headers: HTTPHeaders = [
-            "Authorization":"Basic 0JHRg9C70LPQsNC60L7QsjpHcnV6UmF6Ym9yNjY="
-        ]
+        self.view.makeToastActivity(.center)
         let params = ["ТипПараметра":"Штрихкод", "ЗначениеПараметра": "2000000063768"]
-        
-        apiController.getProductInfo(params: params, headers: headers) { result in
+        apiController.getProductInfo(params: params) { result in
+            self.view.hideToastActivity()
             switch result {
             case .success(let product):
                 let model = DetailModel(product: product, photos: [])
@@ -190,9 +172,6 @@ class MainViewController: UIViewController {
     // MARK: - Actions
     @IBAction func addPhotoDidTapped(_ sender: UIButton) {
         presentAddPhotoActionSheet()
-    }
-    @IBAction func scanerButtonDidTapped(_ sender: Any) {
-        self.tabBarController?.selectedIndex = 1
     }
 }
 
@@ -302,7 +281,6 @@ extension MainViewController {
 // MARK: - CollectionViewDelegate and DataSource
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return (model?.photos.count ?? 0) + 1
         if let model = model {
             return model.photos.count + 1
         } else {
@@ -334,11 +312,12 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let photos = model?.photos else { return }
+        guard let photo = model?.photos[indexPath.row] else { return }
         let button = UIBarButtonItem(barButtonSystemItem: .stop, target: nil, action: nil)
         button.tintColor = .white
-        let agrume = Agrume(images: photos, startIndex: indexPath.row, background: .colored(.black), dismissal: .withPanAndButton(.standard, button))
-        agrume.show(from: self)
+        let agrume = Agrume(image: photo, background: .blurred(.dark), dismissal: .withPanAndButton(.standard, button), overlayView: .none)
+        self.show(agrume, sender: nil)
+//        agrume.show(from: self)
     }
     
 }

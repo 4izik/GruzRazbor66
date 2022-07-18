@@ -19,7 +19,11 @@ class APIController {
     
     private init?() {}
     
-    func getProductInfo(params: [String: String], headers: HTTPHeaders? = nil, completion: @escaping ((Result<Product, NSError>) -> Void)) {
+    func getProductInfo(params: [String: String], completion: @escaping ((Result<Product, NSError>) -> Void)) {
+        var headers: HTTPHeaders = ["Authorization": ""]
+        if let loginAndPassBase64 = UserDefaults.standard.value(forKey: "loginAndPass") as? String {
+            headers["Authorization"] = "Basic \(loginAndPassBase64)"
+        }
         APIController.manager.request((NetworkConstants.host + NetworkConstants.getProductInfo), method: .get, parameters: params, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: ProductDto.self) { response in
@@ -33,7 +37,11 @@ class APIController {
             }
     }
     
-    func getProductPrices(params: [String: String], headers: HTTPHeaders? = nil, completion: @escaping ((Result<[Price], NSError>) -> Void)) {
+    func getProductPrices(params: [String: String], completion: @escaping ((Result<[Price], NSError>) -> Void)) {
+        var headers: HTTPHeaders = ["Authorization": ""]
+        if let loginAndPassBase64 = UserDefaults.standard.value(forKey: "loginAndPass") as? String {
+            headers["Authorization"] = "Basic \(loginAndPassBase64)"
+        }
         APIController.manager.request((NetworkConstants.host + NetworkConstants.getSuppliersPrices), method: .get, parameters: params, headers: headers)
             .validate(statusCode: 200..<300)
             .responseJSON { response in
@@ -47,7 +55,12 @@ class APIController {
             }
     }
     
-    func getProductImages(params: [String:String], headers: HTTPHeaders? = nil, completion: @escaping ((Result<[ImageModel], NSError>) -> Void)) {
+    func getProductImages(params: [String:String], completion: @escaping ((Result<[ImageModel], NSError>) -> Void)) {
+        let loginAndPassBase64 = UserDefaults.standard.value(forKey: "loginAndPass") as? String
+        var headers: HTTPHeaders = ["Authorization": ""]
+        if let loginAndPassBase64 = UserDefaults.standard.value(forKey: "loginAndPass") as? String {
+            headers["Authorization"] = "Basic \(loginAndPassBase64)"
+        }
         APIController.manager.request(NetworkConstants.host + NetworkConstants.getProductPictures, method: .get, parameters: params, headers: headers)
             .validate(statusCode:200..<300)
             .responseJSON { response in
