@@ -135,7 +135,9 @@ class MainViewController: UIViewController {
                     self.addPhotos(photos: images)
                 }
             case .failure(let error):
-                print(error.localizedDescription)
+                DispatchQueue.main.async {
+                    self.view.makeToast(error.localizedDescription, duration: 3.0, position: .center)
+                }
             }
         }
     }
@@ -156,7 +158,9 @@ class MainViewController: UIViewController {
                     self.tableView.reloadData()
                 }
             case .failure(let error):
-                print(error.localizedDescription)
+                DispatchQueue.main.async {
+                    self.view.makeToast(error.localizedDescription, duration: 3.0, position: .center)
+                }
             }
         }
         

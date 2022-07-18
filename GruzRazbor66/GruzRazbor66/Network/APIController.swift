@@ -20,6 +20,11 @@ class APIController {
     private init?() {}
     
     func getProductInfo(params: [String: String], completion: @escaping ((Result<Product, NSError>) -> Void)) {
+        let isLoggenIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
+        if isLoggenIn == false {
+            completion(.failure(NSError.makeEror(description: "Необходимо авторизоваться")))
+            return
+        }
         var headers: HTTPHeaders = ["Authorization": ""]
         if let loginAndPassBase64 = UserDefaults.standard.value(forKey: "loginAndPass") as? String {
             headers["Authorization"] = "Basic \(loginAndPassBase64)"
@@ -38,6 +43,11 @@ class APIController {
     }
     
     func getProductPrices(params: [String: String], completion: @escaping ((Result<[Price], NSError>) -> Void)) {
+        let isLoggenIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
+        if isLoggenIn == false {
+            completion(.failure(NSError.makeEror(description: "Необходимо авторизоваться")))
+            return
+        }
         var headers: HTTPHeaders = ["Authorization": ""]
         if let loginAndPassBase64 = UserDefaults.standard.value(forKey: "loginAndPass") as? String {
             headers["Authorization"] = "Basic \(loginAndPassBase64)"
@@ -56,6 +66,11 @@ class APIController {
     }
     
     func getProductImages(params: [String:String], completion: @escaping ((Result<[ImageModel], NSError>) -> Void)) {
+        let isLoggenIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
+        if isLoggenIn == false {
+            completion(.failure(NSError.makeEror(description: "Необходимо авторизоваться")))
+            return
+        }
         let loginAndPassBase64 = UserDefaults.standard.value(forKey: "loginAndPass") as? String
         var headers: HTTPHeaders = ["Authorization": ""]
         if let loginAndPassBase64 = UserDefaults.standard.value(forKey: "loginAndPass") as? String {

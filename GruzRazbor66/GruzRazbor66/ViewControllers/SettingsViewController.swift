@@ -44,11 +44,12 @@ class SettingsViewController: UIViewController, ValidationDelegate {
             switch result {
             case .success(_):
                 UserDefaults.standard.set(strBase64, forKey: "loginAndPass")
+                UserDefaults.standard.set(true, forKey: "isLoggedIn")
                 DispatchQueue.main.async {
                     self.updateUI(isConnected: true)
                 }
             case .failure(let error):
-                self.view.makeToast(error.localizedDescription, duration: 3.0, position: .top)
+                self.view.makeToast(error.localizedDescription, duration: 3.0, position: .center)
                 DispatchQueue.main.async {
                     self.updateUI(isConnected: false)
                 }
@@ -70,6 +71,7 @@ class SettingsViewController: UIViewController, ValidationDelegate {
         updateUI(isConnected: false)
         self.view.makeToast("Successfully disconnected")
         UserDefaults.standard.set("", forKey: "loginAndPass")
+        UserDefaults.standard.set(false, forKey: "isLoggedIn")
     }
     
 }
