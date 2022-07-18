@@ -316,8 +316,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let button = UIBarButtonItem(barButtonSystemItem: .stop, target: nil, action: nil)
         button.tintColor = .white
         let agrume = Agrume(image: photo, background: .blurred(.dark), dismissal: .withPanAndButton(.standard, button), overlayView: .none)
-        self.show(agrume, sender: nil)
-//        agrume.show(from: self)
+        agrume.show(from: self)
     }
     
 }
