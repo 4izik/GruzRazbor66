@@ -30,7 +30,18 @@ class SettingsViewController: UIViewController, ValidationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupValidator()
-        updateUI(isConnected: UserDefaults.standard.bool(forKey: "isLoggedIn"))
+        updateUI(isConnected: UserDefaults.standard.bool(forKey: "isLoggedIn")) 
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+        loginTF.attributedPlaceholder = NSAttributedString(string: "Имя пользователя", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray])
+        passwordTF.attributedPlaceholder = NSAttributedString(string: "Пароль", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray])
+
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        loginTF.attributedPlaceholder = NSAttributedString(string: "Имя пользователя", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray])
+        passwordTF.attributedPlaceholder = NSAttributedString(string: "Пароль", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray])
     }
     
     private func setupValidator() {
@@ -47,6 +58,7 @@ class SettingsViewController: UIViewController, ValidationDelegate {
             self.view.hideToastActivity()
             switch result {
             case .success(_):
+                self.view.endEditing(true)
                 UserDefaults.standard.set(strBase64, forKey: "loginAndPass")
                 UserDefaults.standard.set(true, forKey: "isLoggedIn")
                 UserDefaults.standard.set(login, forKey: "login")
@@ -68,8 +80,12 @@ class SettingsViewController: UIViewController, ValidationDelegate {
         disconnectButton.isHidden = !connectButton.isHidden
         textFieldsStackView.isHidden = !disconnectButton.isHidden
         secondLabel.isHidden = textFieldsStackView.isHidden
-        if let login = UserDefaults.standard.string(forKey: "login") {
-            connectTo1CLabel.text = "Пользователь - \(login)"
+        if isConnected {
+            if let login = UserDefaults.standard.value(forKey: "login") {
+                connectTo1CLabel.text = "Пользователь - \(login)"
+            } else {
+                connectTo1CLabel.text = "Подключение к 1С"
+            }
         } else {
             connectTo1CLabel.text = "Подключение к 1С"
         }
@@ -80,7 +96,7 @@ class SettingsViewController: UIViewController, ValidationDelegate {
     }
     
     @IBAction func disconnectButtonDidTaped(_ sender: Any) {
-        UserDefaults.standard.set("", forKey: "loginAndPass")
+        UserDefaults.standard.set(nil, forKey: "loginAndPass")
         UserDefaults.standard.set(false, forKey: "isLoggedIn")
         UserDefaults.standard.set(nil, forKey: "login")
         updateUI(isConnected: false)
@@ -93,17 +109,17 @@ class SettingsViewController: UIViewController, ValidationDelegate {
 // MARK: - ValidationDelegate
 extension SettingsViewController {
     func validationSuccessful() {
+        loginTF.attributedPlaceholder = NSAttributedString(string: "Имя пользователя", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray])
+        passwordTF.attributedPlaceholder = NSAttributedString(string: "Пароль", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray])
         updateTF()
         logIn()
     }
     
     func validationFailed(_ errors: [(Validatable, ValidationError)]) {
-        for (field, error) in errors {
+        for (field, _) in errors {
             if let field = field as? UITextField {
-                field.layer.borderColor = UIColor.red.cgColor
-                field.layer.borderWidth = 1.0
                 field.shakeHorizontally()
-                field.placeholder = error.errorMessage
+                field.attributedPlaceholder = NSAttributedString(string: "Это поле обязательно!", attributes: [NSAttributedString.Key.foregroundColor : UIColor.red])
             }
         }
     }

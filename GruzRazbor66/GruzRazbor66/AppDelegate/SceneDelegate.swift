@@ -14,31 +14,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let _ = (scene as? UIWindowScene) else { return }
-//        setupNavBar()
+        setupTabBar()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
-    }
-
-    func sceneDidBecomeActive(_ scene: UIScene) {
-    }
-
-    func sceneWillResignActive(_ scene: UIScene) {
-    }
-
-    func sceneWillEnterForeground(_ scene: UIScene) {
-    }
-
-    func sceneDidEnterBackground(_ scene: UIScene) {
+        UserDefaults.standard.set(nil, forKey: "loginAndPass")
+        UserDefaults.standard.set(false, forKey: "isLoggedIn")
+        UserDefaults.standard.set(nil, forKey: "login")
     }
 }
 
 extension SceneDelegate {
-    private func setupNavBar() {
-        let appearance = UINavigationBarAppearance()
+    private func setupTabBar() {
+        let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().compactAppearance = appearance
-        UINavigationBar.appearance().tintColor = .black
+        appearance.backgroundColor = UIColor(red: 70/255, green: 83/255, blue: 97/255, alpha: 1.0)
+        UITabBar.appearance().standardAppearance = appearance
+        if #available(iOS 15.0, *) {
+            UITabBar.appearance().scrollEdgeAppearance = appearance
+        }
+        UITabBar.appearance().tintColor = .white
+
     }
 }

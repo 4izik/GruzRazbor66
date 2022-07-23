@@ -20,6 +20,22 @@ class ScanerViewController: UIViewController {
         startRunning()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if (session.isRunning == false) {
+            view.layer.addSublayer(video)
+            session.startRunning()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if (session.isRunning == true) {
+            session.stopRunning()
+        }
+    }
+
     func setupVideo() {
         let captureDevice = AVCaptureDevice.default(for: .video)
         do {
@@ -48,6 +64,7 @@ class ScanerViewController: UIViewController {
 
 extension ScanerViewController: AVCaptureMetadataOutputObjectsDelegate {
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        self.session.stopRunning()
         guard !metadataObjects.isEmpty else { return }
         if let object = metadataObjects.first as? AVMetadataMachineReadableCodeObject {
             if object.type == AVMetadataObject.ObjectType.qr {
@@ -66,7 +83,6 @@ extension ScanerViewController: AVCaptureMetadataOutputObjectsDelegate {
                 alert.addAction(UIAlertAction(title: "Копировать", style: .default, handler: { [weak self] _ in
                     UIPasteboard.general.string = object.stringValue
                     self?.view.layer.sublayers?.removeLast()
-                    self?.session.stopRunning()
                 }))
                 present(alert, animated: true, completion: nil)
             }
