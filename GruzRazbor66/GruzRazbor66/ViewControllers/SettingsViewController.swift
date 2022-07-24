@@ -63,10 +63,6 @@ class SettingsViewController: UIViewController, ValidationDelegate {
         validator.registerField(passwordTF, rules: [RequiredRule()])
     }
     
-    private func setupPlaceholders() {
-        
-    }
-    
     private func logIn() {
         self.view.makeToastActivity(.center)
         guard let password = passwordTF.text, let login = loginTF.text else { return }
@@ -120,7 +116,7 @@ class SettingsViewController: UIViewController, ValidationDelegate {
         updateUI(isConnected: false)
         loginTF.text = ""
         passwordTF.text = ""
-        self.view.makeToast("Успешный выход", duration: 3.0, position: .center)
+        self.view.makeToast("Успешный выход", duration: 3.0, position: .top)
     }
     
 }
@@ -131,7 +127,6 @@ extension SettingsViewController {
     func validationSuccessful() {
         loginTF.attributedPlaceholder = NSAttributedString(string: "Имя пользователя", attributes: [.foregroundColor : UIColor.lightGray, .font: UIFont.boldSystemFont(ofSize: 15)])
         passwordTF.attributedPlaceholder = NSAttributedString(string: "Пароль", attributes: [.foregroundColor : UIColor.lightGray, .font: UIFont.boldSystemFont(ofSize: 15)])
-        updateTF()
         logIn()
     }
     
@@ -142,12 +137,5 @@ extension SettingsViewController {
                 field.attributedPlaceholder = NSAttributedString(string: "Это поле обязательно!", attributes: [NSAttributedString.Key.foregroundColor : UIColor.red])
             }
         }
-    }
-    
-    private func updateTF() {
-        self.passwordTF.layer.borderColor = UIColor.black.cgColor
-        self.loginTF.layer.borderColor = UIColor.black.cgColor
-        self.passwordTF.placeholder = "Пароль"
-        self.loginTF.placeholder = "Имя пользователя"
     }
 }

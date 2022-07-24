@@ -36,7 +36,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="mHT-J5-urE">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="mHT-J5-urE">
                                 <rect key="frame" x="16" y="346" width="382" height="48"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f89-bd-WCB">
@@ -45,6 +45,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="cBx-OI-iVv"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Подключить">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -78,6 +79,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="HXo-Dk-PVu"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Отключить">
                                             <color key="titleColor" red="0.031372549020000001" green="0.56862745100000001" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -121,7 +123,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="pvJ-Vd-lUy"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" textContentType="username"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -135,7 +137,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="myz-Mk-EH8"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -147,6 +149,12 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Настройки" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nRP-LO-QfU">
+                                <rect key="frame" x="159" y="60" width="96" height="21.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jgZ-0a-fIV"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -156,7 +164,9 @@
                             <constraint firstItem="Du1-TL-bPk" firstAttribute="leading" secondItem="jgZ-0a-fIV" secondAttribute="leading" constant="16" id="X3F-Ej-qoA"/>
                             <constraint firstItem="jgZ-0a-fIV" firstAttribute="trailing" secondItem="Du1-TL-bPk" secondAttribute="trailing" constant="16" id="XOQ-61-gBT"/>
                             <constraint firstItem="mHT-J5-urE" firstAttribute="top" secondItem="Du1-TL-bPk" secondAttribute="bottom" constant="16" id="qFb-zr-aqe"/>
+                            <constraint firstItem="nRP-LO-QfU" firstAttribute="top" secondItem="jgZ-0a-fIV" secondAttribute="top" constant="16" id="qxf-A3-I97"/>
                             <constraint firstItem="jgZ-0a-fIV" firstAttribute="trailing" secondItem="mHT-J5-urE" secondAttribute="trailing" constant="16" id="rUM-dG-amz"/>
+                            <constraint firstItem="nRP-LO-QfU" firstAttribute="centerX" secondItem="jgZ-0a-fIV" secondAttribute="centerX" id="uAp-HN-hhZ"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="settingsUnselected" selectedImage="settingsSelected" id="ZgJ-x8-Xv7"/>
@@ -175,7 +185,7 @@
             </objects>
             <point key="canvasLocation" x="-300" y="956"/>
         </scene>
-        <!--Карточка-->
+        <!--Main View Controller-->
         <scene sceneID="JVz-Qv-1ZQ">
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="q9Q-Ie-H7d" customClass="MainViewController" customModule="GruzRazbor66" customModuleProvider="target" sceneMemberID="viewController">
@@ -184,14 +194,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Введите штрихкод" translatesAutoresizingMaskIntoConstraints="NO" id="Tqp-Z2-J6H">
-                                <rect key="frame" x="16" y="104" width="382" height="48"/>
+                                <rect key="frame" x="16" y="104" width="382" height="36"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="y3H-j2-jvz"/>
+                                    <constraint firstAttribute="height" constant="36" id="y3H-j2-jvz"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits" returnKeyType="search"/>
                             </searchBar>
                             <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xjV-nf-nVZ">
-                                <rect key="frame" x="16" y="168" width="382" height="168"/>
+                                <rect key="frame" x="16" y="156" width="382" height="168"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="168" id="pCZ-fx-Vkb"/>
@@ -277,7 +287,7 @@
                                 </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Диск колесный R22.5, 9J, ET161, DIA-281, PCD-10x335 (EURO) 2ERE - E32- 33 -78..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JCg-25-0L5">
-                                <rect key="frame" x="16" y="354" width="382" height="64"/>
+                                <rect key="frame" x="16" y="342" width="382" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="TPy-yI-HLL"/>
                                 </constraints>
@@ -286,7 +296,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="48" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="0Gy-4k-rUv">
-                                <rect key="frame" x="0.0" y="434" width="414" height="305"/>
+                                <rect key="frame" x="0.0" y="422" width="414" height="301"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MainTableViewCell" id="WCv-eN-iR9" customClass="MainTableViewCell" customModule="GruzRazbor66" customModuleProvider="target">
@@ -363,7 +373,7 @@
                                 </connections>
                             </tableView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="esX-VE-SWC">
-                                <rect key="frame" x="16" y="168" width="382" height="168"/>
+                                <rect key="frame" x="16" y="156" width="382" height="168"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bZn-y6-lFZ">
                                         <rect key="frame" x="106" y="85" width="170" height="48"/>
@@ -372,7 +382,7 @@
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="170" id="7Tv-9r-2Kr"/>
                                             <constraint firstAttribute="height" constant="48" id="kcA-Ho-plE"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Добавить фото">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -407,15 +417,16 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fCf-I0-ybH">
-                                <rect key="frame" x="228" y="749" width="170" height="48"/>
+                                <rect key="frame" x="228" y="731" width="170" height="48"/>
                                 <color key="backgroundColor" red="0.031372549019607843" green="0.56862745098039214" blue="0.87058823529411766" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="170" id="3iY-rF-OsC"/>
                                     <constraint firstAttribute="height" constant="48" id="snB-qn-MaJ"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="В корзину"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="В корзину"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <integer key="value" value="6"/>
@@ -423,7 +434,7 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Kbs-xC-oz0">
-                                <rect key="frame" x="12" y="757.5" width="103" height="31"/>
+                                <rect key="frame" x="12" y="739.5" width="103" height="31"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Авито" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c1a-cA-cLh">
                                         <rect key="frame" x="0.0" y="0.0" width="46" height="31"/>
@@ -457,17 +468,17 @@
                             <constraint firstItem="xjV-nf-nVZ" firstAttribute="top" secondItem="Tqp-Z2-J6H" secondAttribute="bottom" constant="16" id="Qd5-Te-MDw"/>
                             <constraint firstItem="esX-VE-SWC" firstAttribute="height" secondItem="xjV-nf-nVZ" secondAttribute="height" id="VtF-Ed-Lws"/>
                             <constraint firstItem="fCf-I0-ybH" firstAttribute="leading" relation="lessThanOrEqual" secondItem="Kbs-xC-oz0" secondAttribute="trailing" constant="113" id="WZv-aI-Wib"/>
-                            <constraint firstItem="KFp-7J-USW" firstAttribute="bottom" secondItem="fCf-I0-ybH" secondAttribute="bottom" constant="16" id="Ya4-r2-oUF"/>
+                            <constraint firstItem="KFp-7J-USW" firstAttribute="bottom" secondItem="fCf-I0-ybH" secondAttribute="bottom" constant="34" id="Ya4-r2-oUF"/>
                             <constraint firstItem="KFp-7J-USW" firstAttribute="trailing" secondItem="JCg-25-0L5" secondAttribute="trailing" constant="16" id="cJ4-nL-JVz"/>
                             <constraint firstItem="xjV-nf-nVZ" firstAttribute="leading" secondItem="KFp-7J-USW" secondAttribute="leading" constant="16" id="fGh-oe-Fgy"/>
                             <constraint firstItem="KFp-7J-USW" firstAttribute="trailing" secondItem="0Gy-4k-rUv" secondAttribute="trailing" id="g5L-GB-Zut"/>
                             <constraint firstItem="Kbs-xC-oz0" firstAttribute="centerY" secondItem="fCf-I0-ybH" secondAttribute="centerY" id="iXl-K7-A4b"/>
-                            <constraint firstItem="fCf-I0-ybH" firstAttribute="top" secondItem="0Gy-4k-rUv" secondAttribute="bottom" constant="10" id="jW3-Sx-HOG"/>
+                            <constraint firstItem="fCf-I0-ybH" firstAttribute="top" secondItem="0Gy-4k-rUv" secondAttribute="bottom" constant="8" symbolic="YES" id="jW3-Sx-HOG"/>
                             <constraint firstItem="Tqp-Z2-J6H" firstAttribute="top" secondItem="KFp-7J-USW" secondAttribute="top" constant="16" id="q8u-4H-g4g"/>
                             <constraint firstItem="JCg-25-0L5" firstAttribute="top" secondItem="xjV-nf-nVZ" secondAttribute="bottom" constant="18" id="toj-34-Vxr"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Карточка" largeTitleDisplayMode="never" id="55i-jU-YEc"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="55i-jU-YEc"/>
                     <connections>
                         <outlet property="addPhotoViewContainer" destination="esX-VE-SWC" id="5hc-S3-ewn"/>
                         <outlet property="basketButton" destination="fCf-I0-ybH" id="sZl-dv-8Pw"/>
