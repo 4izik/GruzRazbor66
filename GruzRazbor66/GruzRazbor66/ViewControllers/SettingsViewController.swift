@@ -20,8 +20,22 @@ class SettingsViewController: UIViewController, ValidationDelegate {
     // MARK: - IBOutlets
     @IBOutlet weak var connectTo1CLabel: UILabel!
     @IBOutlet weak var secondLabel: UILabel!
-    @IBOutlet weak var loginTF: UITextField!
-    @IBOutlet weak var passwordTF: UITextField!
+    @IBOutlet weak var loginTF: UITextField! {
+        didSet {
+            loginTF.attributedPlaceholder = NSAttributedString(string: "Имя пользователя", attributes: [
+                .foregroundColor: UIColor.lightGray,
+                .font: UIFont.boldSystemFont(ofSize: 15.0)
+            ])
+        }
+    }
+    @IBOutlet weak var passwordTF: UITextField! {
+        didSet {
+            passwordTF.attributedPlaceholder = NSAttributedString(string: "Пароль", attributes: [
+                .foregroundColor: UIColor.lightGray,
+                .font: UIFont.boldSystemFont(ofSize: 15.0)
+            ])
+        }
+    }
     @IBOutlet weak var connectButton: UIButton!
     @IBOutlet weak var connectedLabel: UILabel!
     @IBOutlet weak var disconnectButton: UIButton!
@@ -30,23 +44,27 @@ class SettingsViewController: UIViewController, ValidationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupValidator()
-        updateUI(isConnected: UserDefaults.standard.bool(forKey: "isLoggedIn")) 
+        updateUI(isConnected: UserDefaults.standard.bool(forKey: "isLoggedIn"))
     }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
-        loginTF.attributedPlaceholder = NSAttributedString(string: "Имя пользователя", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray])
-        passwordTF.attributedPlaceholder = NSAttributedString(string: "Пароль", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray])
-
+        loginTF.attributedPlaceholder = NSAttributedString(string: "Имя пользователя", attributes: [.foregroundColor : UIColor.lightGray, .font: UIFont.boldSystemFont(ofSize: 15)])
+        passwordTF.attributedPlaceholder = NSAttributedString(string: "Пароль", attributes: [.foregroundColor : UIColor.lightGray, .font: UIFont.boldSystemFont(ofSize: 15)])
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        loginTF.attributedPlaceholder = NSAttributedString(string: "Имя пользователя", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray])
-        passwordTF.attributedPlaceholder = NSAttributedString(string: "Пароль", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray])
+        loginTF.attributedPlaceholder = NSAttributedString(string: "Имя пользователя", attributes: [.foregroundColor : UIColor.lightGray, .font: UIFont.boldSystemFont(ofSize: 15)])
+        passwordTF.attributedPlaceholder = NSAttributedString(string: "Пароль", attributes: [.foregroundColor : UIColor.lightGray, .font: UIFont.boldSystemFont(ofSize: 15)])
     }
     
     private func setupValidator() {
         validator.registerField(loginTF, rules: [RequiredRule()])
         validator.registerField(passwordTF, rules: [RequiredRule()])
+    }
+    
+    private func setupPlaceholders() {
+        
     }
     
     private func logIn() {
@@ -100,6 +118,8 @@ class SettingsViewController: UIViewController, ValidationDelegate {
         UserDefaults.standard.set(false, forKey: "isLoggedIn")
         UserDefaults.standard.set(nil, forKey: "login")
         updateUI(isConnected: false)
+        loginTF.text = ""
+        passwordTF.text = ""
         self.view.makeToast("Успешный выход", duration: 3.0, position: .center)
     }
     
@@ -109,8 +129,8 @@ class SettingsViewController: UIViewController, ValidationDelegate {
 // MARK: - ValidationDelegate
 extension SettingsViewController {
     func validationSuccessful() {
-        loginTF.attributedPlaceholder = NSAttributedString(string: "Имя пользователя", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray])
-        passwordTF.attributedPlaceholder = NSAttributedString(string: "Пароль", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray])
+        loginTF.attributedPlaceholder = NSAttributedString(string: "Имя пользователя", attributes: [.foregroundColor : UIColor.lightGray, .font: UIFont.boldSystemFont(ofSize: 15)])
+        passwordTF.attributedPlaceholder = NSAttributedString(string: "Пароль", attributes: [.foregroundColor : UIColor.lightGray, .font: UIFont.boldSystemFont(ofSize: 15)])
         updateTF()
         logIn()
     }

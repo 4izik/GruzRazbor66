@@ -182,12 +182,12 @@ class MainViewController: UIViewController {
         
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Prices" {
-            guard let product = model?.product, let vc = segue.destination as? PricesTableViewController else { return }
-            vc.vendorCode = product.vendorCode
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "Prices" {
+//            guard let product = model?.product, let vc = segue.destination as? PricesTableViewController else { return }
+//            vc.vendorCode = product.vendorCode
+//        }
+//    }
     
     // MARK: - Actions
     @IBAction func addPhotoDidTapped(_ sender: UIButton) {
@@ -214,7 +214,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             case 0: cell.valueLabel.text = product.auto
             case 1:
                 cell.valueLabel.text = "\(product.price)"
-                cell.arrowView.isHidden = false
+//                cell.arrowView.isHidden = false
             case 2:
                 cell.valueLabel.text = "\(product.balance)"
             case 3: cell.valueLabel.text = product.id
@@ -227,15 +227,15 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        switch indexPath.row {
-        case 1:
-            performSegue(withIdentifier: "Prices", sender: nil)
-        default:
-            tableView.deselectRow(at: indexPath, animated: false)
-        }
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//        switch indexPath.row {
+//        case 1:
+//            performSegue(withIdentifier: "Prices", sender: nil)
+//        default:
+//            tableView.deselectRow(at: indexPath, animated: false)
+//        }
+//    }
 }
 
 // MARK: - CollectionViewDelegate and DataSource
