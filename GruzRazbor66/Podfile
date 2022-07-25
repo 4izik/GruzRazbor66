@@ -1,13 +1,26 @@
-# Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, :deployment_target => '13.0'
+
+# ignore all warnings from all pods
+inhibit_all_warnings!
+
+def all_pods
+	pod 'RealmSwift'
+ 	pod 'Alamofire'
+        pod 'Toast-Swift', '~> 5.0.1'
+        pod 'SwiftValidator', :git => 'https://github.com/jpotts18/SwiftValidator.git', :tag => '4.2.0'
+        pod "Agrume"
+end
 
 target 'GruzRazbor66' do
-  # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
-
-  # Pods for GruzRazbor66
-pod "Agrume"
-pod "Alamofire"
-pod 'SwiftValidator', :git => 'https://github.com/jpotts18/SwiftValidator.git', :tag => '4.2.0'
-pod 'Toast-Swift', '~> 5.0.1'
+	use_frameworks!
+	all_pods
 end
+
+post_install do |installer|
+    installer.pods_project.build_configurations.each do |config|
+        config.build_settings.delete('CODE_SIGNING_ALLOWED')
+        config.build_settings.delete('CODE_SIGNING_REQUIRED')
+    end
+end
+

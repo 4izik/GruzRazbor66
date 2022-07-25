@@ -36,6 +36,7 @@
 		F5D382AE286CCE02002A973A /* PriceDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D382AD286CCE02002A973A /* PriceDto.swift */; };
 		F5D382B1286CCFA6002A973A /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D382B0286CCFA6002A973A /* Product.swift */; };
 		F5D382B3286CD109002A973A /* Price.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D382B2286CD109002A973A /* Price.swift */; };
+		F5EEC794288F2E0A00EEA312 /* ProductEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EEC793288F2E0A00EEA312 /* ProductEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		F5D382AD286CCE02002A973A /* PriceDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceDto.swift; sourceTree = "<group>"; };
 		F5D382B0286CCFA6002A973A /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		F5D382B2286CD109002A973A /* Price.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Price.swift; sourceTree = "<group>"; };
+		F5EEC793288F2E0A00EEA312 /* ProductEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 				F5D382B0286CCFA6002A973A /* Product.swift */,
 				F5D382B2286CD109002A973A /* Price.swift */,
 				F588690328734FF700AA2BDF /* Image.swift */,
+				F5EEC793288F2E0A00EEA312 /* ProductEntity.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				5DE36F43283C089100B191C7 /* ScanerViewController.swift in Sources */,
 				F5D382AA286CBCA1002A973A /* NetworkConstants.swift in Sources */,
 				5D4A3CBD2863126D00B1CF57 /* OverlayView.swift in Sources */,
+				F5EEC794288F2E0A00EEA312 /* ProductEntity.swift in Sources */,
 				F58869002873497D00AA2BDF /* String+base64.swift in Sources */,
 				F5C8D05E286E11CB00FAD4AC /* NSErrorExtension.swift in Sources */,
 				F588690428734FF700AA2BDF /* Image.swift in Sources */,
