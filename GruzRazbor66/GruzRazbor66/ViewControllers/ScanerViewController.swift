@@ -9,13 +9,31 @@ import UIKit
 import AVFoundation
 
 class ScanerViewController: UIViewController {
+    // MARK: - Properties
+    
     var video = AVCaptureVideoPreviewLayer()
     let session = AVCaptureSession()
-    
+        
+    // MARK: - Vivew LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         startRunning()
-        // Do any additional setup after loading the view.
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if (session.isRunning == false) {
+            view.layer.addSublayer(video)
+            session.startRunning()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if (session.isRunning == true) {
+            session.stopRunning()
+        }
     }
 
     func setupVideo() {
@@ -41,21 +59,30 @@ class ScanerViewController: UIViewController {
         view.layer.addSublayer(video)
         session.startRunning()
     }
+    
 }
 
 extension ScanerViewController: AVCaptureMetadataOutputObjectsDelegate {
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        self.session.stopRunning()
         guard !metadataObjects.isEmpty else { return }
         if let object = metadataObjects.first as? AVMetadataMachineReadableCodeObject {
             if object.type == AVMetadataObject.ObjectType.qr {
                 let alert = UIAlertController(title: "QR Code", message: object.stringValue, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Перейти", style: .default, handler: { _ in
-                    print(object.stringValue)
+                alert.addAction(UIAlertAction(title: "Перейти", style: .default, handler: { [weak self] _ in
+                    if let vendorCode = object.stringValue {
+                        DispatchQueue.main.async { [weak self] in
+                            let navigationVC = self?.tabBarController?.viewControllers?[0] as! UINavigationController
+                            let mainVC = navigationVC.topViewController as! MainViewController
+                            mainVC.codeFromScanner = vendorCode
+                            self?.tabBarController?.selectedIndex = 0
+                            
+                        }
+                    }
                 }))
-                alert.addAction(UIAlertAction(title: "Копировать", style: .default, handler: { _ in
+                alert.addAction(UIAlertAction(title: "Копировать", style: .default, handler: { [weak self] _ in
                     UIPasteboard.general.string = object.stringValue
-                    self.view.layer.sublayers?.removeLast()
-                    self.session.stopRunning()
+                    self?.view.layer.sublayers?.removeLast()
                 }))
                 present(alert, animated: true, completion: nil)
             }

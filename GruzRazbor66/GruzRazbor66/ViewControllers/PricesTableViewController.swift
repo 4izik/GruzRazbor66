@@ -21,10 +21,7 @@ class PricesTableViewController: UITableViewController {
     
     private func loadPrices(vendorCode: String) {
         let params: [String: String] = ["Артикул": vendorCode]
-        let headers: HTTPHeaders = [
-            "Authorization":"Basic 0JHRg9C70LPQsNC60L7QsjpHcnV6UmF6Ym9yNjY="
-        ]
-        self.apiController.getProductPrices(params: params, headers: headers) { result in
+        self.apiController.getProductPrices(params: params) { result in
             switch result {
             case .success(let prices):
                 self.prices = prices

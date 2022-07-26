@@ -11,6 +11,7 @@ class MainTableViewCell: UITableViewCell {
 
     @IBOutlet weak var propertyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
+    @IBOutlet weak var arrowView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

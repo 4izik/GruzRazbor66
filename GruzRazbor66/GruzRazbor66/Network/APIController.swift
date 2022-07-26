@@ -19,7 +19,16 @@ class APIController {
     
     private init?() {}
     
-    func getProductInfo(params: [String: String], headers: HTTPHeaders? = nil, completion: @escaping ((Result<Product, NSError>) -> Void)) {
+    func getProductInfo(params: [String: String], completion: @escaping ((Result<Product, NSError>) -> Void)) {
+        let isLoggenIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
+        if isLoggenIn == false {
+            completion(.failure(NSError.makeEror(description: "Необходимо авторизоваться")))
+            return
+        }
+        var headers: HTTPHeaders = ["Authorization": ""]
+        if let loginAndPassBase64 = UserDefaults.standard.value(forKey: "loginAndPass") as? String {
+            headers["Authorization"] = "Basic \(loginAndPassBase64)"
+        }
         APIController.manager.request((NetworkConstants.host + NetworkConstants.getProductInfo), method: .get, parameters: params, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: ProductDto.self) { response in
@@ -33,7 +42,16 @@ class APIController {
             }
     }
     
-    func getProductPrices(params: [String: String], headers: HTTPHeaders? = nil, completion: @escaping ((Result<[Price], NSError>) -> Void)) {
+    func getProductPrices(params: [String: String], completion: @escaping ((Result<[Price], NSError>) -> Void)) {
+        let isLoggenIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
+        if isLoggenIn == false {
+            completion(.failure(NSError.makeEror(description: "Необходимо авторизоваться")))
+            return
+        }
+        var headers: HTTPHeaders = ["Authorization": ""]
+        if let loginAndPassBase64 = UserDefaults.standard.value(forKey: "loginAndPass") as? String {
+            headers["Authorization"] = "Basic \(loginAndPassBase64)"
+        }
         APIController.manager.request((NetworkConstants.host + NetworkConstants.getSuppliersPrices), method: .get, parameters: params, headers: headers)
             .validate(statusCode: 200..<300)
             .responseJSON { response in
@@ -47,7 +65,17 @@ class APIController {
             }
     }
     
-    func getProductImages(params: [String:String], headers: HTTPHeaders? = nil, completion: @escaping ((Result<[ImageModel], NSError>) -> Void)) {
+    func getProductImages(params: [String:String], completion: @escaping ((Result<[ImageModel], NSError>) -> Void)) {
+        let isLoggenIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
+        if isLoggenIn == false {
+            completion(.failure(NSError.makeEror(description: "Необходимо авторизоваться")))
+            return
+        }
+        let loginAndPassBase64 = UserDefaults.standard.value(forKey: "loginAndPass") as? String
+        var headers: HTTPHeaders = ["Authorization": ""]
+        if let loginAndPassBase64 = UserDefaults.standard.value(forKey: "loginAndPass") as? String {
+            headers["Authorization"] = "Basic \(loginAndPassBase64)"
+        }
         APIController.manager.request(NetworkConstants.host + NetworkConstants.getProductPictures, method: .get, parameters: params, headers: headers)
             .validate(statusCode:200..<300)
             .responseJSON { response in
@@ -55,6 +83,22 @@ class APIController {
                 case .success(let dto):
                     guard let images = ImageModel.getArray(from: dto) else { return }
                     completion(.success(images))
+                case .failure(let error):
+                    completion(.failure(NSError.makeEror(description: error.localizedDescription)))
+                }
+            }
+    }
+    
+    func testSecureConnection(headers: HTTPHeaders, completion: @escaping ((Result<Bool, NSError>) -> Void)) {
+        APIController.manager.request(NetworkConstants.host + NetworkConstants.testSecureConnection, method: .get, headers: headers)
+            .response { response in
+                switch response.result {
+                case .success(_):
+                    if response.response?.statusCode == 401 {
+                        completion(.failure(NSError.makeEror(description: "Ошибка авторизации")))
+                        return
+                    }
+                    completion(.success(true))
                 case .failure(let error):
                     completion(.failure(NSError.makeEror(description: error.localizedDescription)))
                 }

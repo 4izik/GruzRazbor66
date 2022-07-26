@@ -8,12 +8,17 @@
 import UIKit
 import Agrume
 import PhotosUI
-import Alamofire
+import Toast_Swift
 
 class MainViewController: UIViewController {
     // MARK: - Properties
     let property = ["Автомобиль","Цена","Остаток","Код","Артикул"]
     private var model: DetailModel?
+    var codeFromScanner = "" {
+        didSet {
+            searchBar.text = codeFromScanner
+        }
+    }
     private var selectedImage: Int?
     private var item: ImageCellAddType = .photo
     private let apiController = APIController.shared
@@ -36,9 +41,16 @@ class MainViewController: UIViewController {
     
     // MARK: - IBOutlets
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var scanerButton: UIButton!
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.isHidden = true
+        }
+    }
+    @IBOutlet weak var searchBar: UISearchBar! {
+        didSet {
+            searchBar.delegate = self
+        }
+    }
     @IBOutlet weak var basketButton: UIButton!
     @IBOutlet weak var photosCollectionView: UICollectionView!
     @IBOutlet weak var addPhotoViewContainer: UIView!
@@ -52,23 +64,15 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        model = setDefaultModel()
         setupUI()
-        loadProductInfo()
     }
     
-//    private func setDefaultModel() -> DetailModel {
-////        let detail = DetailModel(auto: "МАЗ-6430А8-370-011 Тяг...", price: "3 000,00", balance: "5", id: "00001673", vendorCode: "5430-3101012")
-//        //        detail.addPhotos(photos: [UIImage(named: "Rectangle1")!, UIImage(named: "Rectangle2")!])
-////        return detail
-//    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
     func setupUI() {
         guard let model = model else { return }
-        
-        scanerButton.layer.cornerRadius = 6
-        scanerButton.clipsToBounds = true
-        scanerButton.setTitle("", for: .normal)
         customizeSearchField()
         
         basketButton.clipsToBounds = true
@@ -99,18 +103,14 @@ class MainViewController: UIViewController {
             glassIconView.tintColor = UIColor.black
         }
     }
-    
+    // MARK: - Private Methods
     private func updateUI() {
-//        if !(model?.photos.isEmpty ?? true) {
-//            addPhotoViewContainer.isHidden = true
-//            photosCollectionView.isHidden = false
-//        }
         if let model = model, model.photos.isEmpty {
-            addPhotoViewContainer.isHidden = true
-            photosCollectionView.isHidden = false
-        } else {
-            photosCollectionView.isHidden = true
             addPhotoViewContainer.isHidden = false
+            photosCollectionView.isHidden = true
+        } else {
+            photosCollectionView.isHidden = false
+            addPhotoViewContainer.isHidden = true
         }
     }
     
@@ -121,41 +121,47 @@ class MainViewController: UIViewController {
         updateUI()
     }
     
+    private func addPhotos(photos: [UIImage]) {
+        model?.photos += photos
+        photosCollectionView.reloadData()
+        updateUI()
+    }
+    
     private func loadImages() {
-        let params = ["НоменклатураИдентификатор":"5dbb89b8-d027-11ec-9740-002655e90aec"]
-        let userName = "Булгаков"
-        let password = "GruzGrazbor66"
-        let base64encoded = "\(userName):\(password)".data(using: .utf8)?.base64EncodedString() ?? ""
-//        let base64encoded = "\(userName):\(password)".encodeBase64()
-        let headers: HTTPHeaders = [
-            "Authorization":"Basic 0JHRg9C70LPQsNC60L7QsjpHcnV6UmF6Ym9yNjY="
-        ]
-        
-        apiController.getProductImages(params: params, headers: headers) { result in
+        self.addPhotoViewContainer.makeToastActivity(.center)
+        guard let model = model,
+            let product = model.product else {
+            return
+        }
+
+        let params = ["НоменклатураИдентификатор":product.id]
+        apiController.getProductImages(params: params) { result in
+            self.addPhotoViewContainer.hideToastActivity()
+            var images: [UIImage] = []
             switch result {
             case .success(let photos):
                 print(photos.count)
                 for photo in photos {
                     let dataDecoded : Data = Data(base64Encoded: photo.base64String, options: .ignoreUnknownCharacters)!
                     let decodedimage = UIImage(data: dataDecoded)
-                    DispatchQueue.main.async {
-                        self.addPhoto(photo: decodedimage!)
-                        self.photosCollectionView.reloadData()
-                    }
+                    images.append(decodedimage!)
+                }
+                DispatchQueue.main.async {
+                    self.addPhotos(photos: images)
                 }
             case .failure(let error):
-                print(error.localizedDescription)
+                DispatchQueue.main.async {
+                    self.view.makeToast(error.localizedDescription, duration: 3.0, position: .top)
+                }
             }
         }
     }
     
-    private func loadProductInfo() {
-        let headers: HTTPHeaders = [
-            "Authorization":"Basic 0JHRg9C70LPQsNC60L7QsjpHcnV6UmF6Ym9yNjY="
-        ]
-        let params = ["ТипПараметра":"Штрихкод", "ЗначениеПараметра": "2000000063768"]
-        
-        apiController.getProductInfo(params: params, headers: headers) { result in
+    private func loadProductInfo(code: String) {
+        self.view.makeToastActivity(.center)
+        let params = ["ТипПараметра":"Штрихкод", "ЗначениеПараметра": code]
+        apiController.getProductInfo(params: params) { result in
+            self.view.hideToastActivity()
             switch result {
             case .success(let product):
                 let model = DetailModel(product: product, photos: [])
@@ -164,21 +170,24 @@ class MainViewController: UIViewController {
                     self.updateUI()
                     self.titleLabel.text = model.product?.name
                     self.loadImages()
+                    self.tableView.isHidden = false
                     self.tableView.reloadData()
                 }
             case .failure(let error):
-                print(error.localizedDescription)
+                DispatchQueue.main.async {
+                    self.view.makeToast(error.localizedDescription, duration: 3.0, position: .top)
+                }
             }
         }
         
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Prices" {
-            guard let product = model?.product, let vc = segue.destination as? PricesTableViewController else { return }
-            vc.vendorCode = product.vendorCode
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "Prices" {
+//            guard let product = model?.product, let vc = segue.destination as? PricesTableViewController else { return }
+//            vc.vendorCode = product.vendorCode
+//        }
+//    }
     
     // MARK: - Actions
     @IBAction func addPhotoDidTapped(_ sender: UIButton) {
@@ -187,7 +196,7 @@ class MainViewController: UIViewController {
 }
 
 
-// MARK: - CollectionViewDelegate and DataSource
+// MARK: - TableViewDelegate & TableViewDataSource
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let _ = model?.product {
@@ -198,8 +207,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let selectedView = UIView.init()
-        selectedView.backgroundColor = .clear
         if let product = model?.product {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: "MainTableViewCell", for: indexPath) as! MainTableViewCell
             cell.propertyLabel.text = property[indexPath.row]
@@ -207,37 +214,74 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             case 0: cell.valueLabel.text = product.auto
             case 1:
                 cell.valueLabel.text = "\(product.price)"
-                cell.accessoryType = .disclosureIndicator
+//                cell.arrowView.isHidden = false
             case 2:
                 cell.valueLabel.text = "\(product.balance)"
-                cell.accessoryType = .disclosureIndicator
             case 3: cell.valueLabel.text = product.id
             case 4: cell.valueLabel.text = product.vendorCode
             default: cell.valueLabel.text = "test"
             }
-//            cell.selectedBackgroundView = selectedView
             return cell
         } else {
             return UITableViewCell()
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        switch indexPath.row {
-        case 1:
-            performSegue(withIdentifier: "Prices", sender: nil)
-            tableView.deselectRow(at: indexPath, animated: false)
-        case 2:
-            performSegue(withIdentifier: "Supplies", sender: nil)
-            tableView.deselectRow(at: indexPath, animated: false)
-        default:
-            tableView.deselectRow(at: indexPath, animated: false)
-        }
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//        switch indexPath.row {
+//        case 1:
+//            performSegue(withIdentifier: "Prices", sender: nil)
+//        default:
+//            tableView.deselectRow(at: indexPath, animated: false)
+//        }
+//    }
 }
 
-// MARK: - Helpers
+// MARK: - CollectionViewDelegate and DataSource
+extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if let model = model {
+            return model.photos.count + 1
+        } else {
+            return 1
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let model = model else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainImageAddCell", for: indexPath) as! MainImageAddCell
+            cell.addButtonDidTapped = {
+                self.presentAddPhotoActionSheet()
+            }
+            return cell
+        }
+        
+        if indexPath.item == model.photos.count {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainImageAddCell", for: indexPath) as! MainImageAddCell
+            cell.addButtonDidTapped = {
+                self.presentAddPhotoActionSheet()
+            }
+            return cell
+        }
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainImageCell", for: indexPath) as! MainImageCell
+        cell.imageView.image = model.photos[indexPath.row]
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let photo = model?.photos[indexPath.row] else { return }
+        let button = UIBarButtonItem(barButtonSystemItem: .stop, target: nil, action: nil)
+        button.tintColor = .white
+        let agrume = Agrume(image: photo, background: .blurred(.dark), dismissal: .withPanAndButton(.standard, button), overlayView: .none)
+        agrume.show(from: self)
+    }
+    
+}
+
+// MARK: - Photopicker
 extension MainViewController {
     private func presentAddPhotoActionSheet() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -288,51 +332,6 @@ extension MainViewController {
     }
 }
 
-
-// MARK: - CollectionViewDelegate and DataSource
-extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return (model?.photos.count ?? 0) + 1
-        if let model = model {
-            return model.photos.count + 1
-        } else {
-            return 1
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        guard let model = model else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainImageAddCell", for: indexPath) as! MainImageAddCell
-            cell.addButtonDidTapped = {
-                self.presentAddPhotoActionSheet()
-            }
-            return cell
-        }
-        
-        if indexPath.item == model.photos.count {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainImageAddCell", for: indexPath) as! MainImageAddCell
-            cell.addButtonDidTapped = {
-                self.presentAddPhotoActionSheet()
-            }
-            return cell
-        }
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainImageCell", for: indexPath) as! MainImageCell
-        cell.imageView.image = model.photos[indexPath.row]
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let photos = model?.photos else { return }
-        let button = UIBarButtonItem(barButtonSystemItem: .stop, target: nil, action: nil)
-        button.tintColor = .white
-        let agrume = Agrume(images: photos, startIndex: indexPath.row, background: .colored(.black), dismissal: .withPanAndButton(.standard, button))
-        agrume.show(from: self)
-    }
-    
-}
-
 extension MainViewController:UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     private func chooseMediaWithType(sourceType: UIImagePickerController.SourceType) {
         imagePickerController.sourceType = sourceType
@@ -361,7 +360,6 @@ extension MainViewController:UIImagePickerControllerDelegate, UINavigationContro
 
 @available(iOS 14, *)
 extension MainViewController: PHPickerViewControllerDelegate {
-    
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true)
         let itemProviders = results.map {$0.itemProvider}
@@ -383,4 +381,14 @@ extension MainViewController: PHPickerViewControllerDelegate {
             }
         }
     }
+}
+
+// MARK: - SearchBar
+extension MainViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        guard let text = searchBar.text, text != "" else { return }
+        loadProductInfo(code: text)
+    }
+
 }

@@ -1,24 +1,52 @@
 PODS:
   - Agrume (5.8.0):
     - SwiftyGif
-  - Alamofire (5.4.4)
+  - Alamofire (5.6.2)
+  - Realm (10.25.1):
+    - Realm/Headers (= 10.25.1)
+  - Realm/Headers (10.25.1)
+  - RealmSwift (10.25.1):
+    - Realm (= 10.25.1)
+  - SwiftValidator (4.0.0)
   - SwiftyGif (5.4.3)
+  - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
   - Agrume
   - Alamofire
+  - RealmSwift
+  - SwiftValidator (from `https://github.com/jpotts18/SwiftValidator.git`, tag `4.2.0`)
+  - Toast-Swift (~> 5.0.1)
 
 SPEC REPOS:
-  trunk:
+  https://github.com/CocoaPods/Specs:
     - Agrume
-    - Alamofire
+    - Realm
+    - RealmSwift
     - SwiftyGif
+  trunk:
+    - Alamofire
+    - Toast-Swift
+
+EXTERNAL SOURCES:
+  SwiftValidator:
+    :git: https://github.com/jpotts18/SwiftValidator.git
+    :tag: 4.2.0
+
+CHECKOUT OPTIONS:
+  SwiftValidator:
+    :git: https://github.com/jpotts18/SwiftValidator.git
+    :tag: 4.2.0
 
 SPEC CHECKSUMS:
   Agrume: 0b1a42b5bfbc3aa9f0801f2857d8df1138cf2951
-  Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
+  Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
+  Realm: 1a6e9b4f6983711655d8c0bcb6d2d29c3afbb1f3
+  RealmSwift: e72669550d27082aa4fad5d176f5076cfe806245
+  SwiftValidator: 249b6b3ae3b294266c5b9de134d94f18f2d5aa47
   SwiftyGif: 6c3eafd0ce693cad58bb63d2b2fb9bacb8552780
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: d2353b53c4fdf28b3a91a480cadf3c6d1fd67e4c
+PODFILE CHECKSUM: af73f1bbc2b307ff046417d58368f7070ef6ec90
 
 COCOAPODS: 1.11.3
