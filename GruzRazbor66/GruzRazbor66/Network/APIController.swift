@@ -65,7 +65,7 @@ class APIController {
             }
     }
     
-    func getProductImages(params: [String:String], completion: @escaping ((Result<[ImageModel], NSError>) -> Void)) {
+    func getProductImages(params: [String:String], completion: @escaping ((Result<[ImageModel]?, NSError>) -> Void)) {
         let isLoggenIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
         if isLoggenIn == false {
             completion(.failure(NSError.makeEror(description: "Необходимо авторизоваться")))

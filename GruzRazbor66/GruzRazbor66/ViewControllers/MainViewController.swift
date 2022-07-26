@@ -28,6 +28,8 @@ class MainViewController: UIViewController {
         imagePickerController.allowsEditing = true
         return imagePickerController
     }()
+    private let reealmManager = ProductFileManager()
+    private var isAddedToCart = false
     
     @available(iOS 14, *)
     private lazy var phPickerViewController: PHPickerViewController = {
@@ -130,21 +132,26 @@ class MainViewController: UIViewController {
     private func loadImages() {
         self.addPhotoViewContainer.makeToastActivity(.center)
         guard let model = model,
-            let product = model.product else {
+              var product = model.product else {
             return
         }
-
+        
         let params = ["НоменклатураИдентификатор":product.id]
         apiController.getProductImages(params: params) { result in
             self.addPhotoViewContainer.hideToastActivity()
             var images: [UIImage] = []
             switch result {
             case .success(let photos):
-                print(photos.count)
-                for photo in photos {
-                    let dataDecoded : Data = Data(base64Encoded: photo.base64String, options: .ignoreUnknownCharacters)!
-                    let decodedimage = UIImage(data: dataDecoded)
-                    images.append(decodedimage!)
+                if let photos = photos {
+                    for photo in photos {
+                        if let dataDecoded : Data = Data(base64Encoded: photo.base64String, options: .ignoreUnknownCharacters) {
+                            let decodedimage = UIImage(data: dataDecoded)
+                            images.append(decodedimage!)
+                        }
+                    }
+                    if let cartImage = Data(base64Encoded: photos[0].base64String, options: [.ignoreUnknownCharacters]) {
+                        product.photo = cartImage
+                    }
                 }
                 DispatchQueue.main.async {
                     self.addPhotos(photos: images)
@@ -166,8 +173,10 @@ class MainViewController: UIViewController {
             case .success(let product):
                 let model = DetailModel(product: product, photos: [])
                 self.model = model
+                self.isAddedToCart = false
                 DispatchQueue.main.async {
                     self.updateUI()
+                    self.updateButonState()
                     self.titleLabel.text = model.product?.name
                     self.loadImages()
                     self.tableView.isHidden = false
@@ -181,17 +190,41 @@ class MainViewController: UIViewController {
         }
         
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "Prices" {
-//            guard let product = model?.product, let vc = segue.destination as? PricesTableViewController else { return }
-//            vc.vendorCode = product.vendorCode
-//        }
-//    }
+    private func updateButonState() {
+        if isAddedToCart {
+            basketButton.backgroundColor = UIColor(red: 90/255, green: 193/255, blue: 92/255, alpha: 1.0)
+            basketButton.setTitle("В корзине", for: .normal)
+        } else {
+            basketButton.backgroundColor = UIColor(red: 8/255, green: 145/255, blue: 222/255, alpha: 1.0)
+            basketButton.setTitle("В корзину", for: .normal)
+        }
+    }
+    //@bobermiha расскомментить когда бек будет готов
+    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //        if segue.identifier == "Prices" {
+    //            guard let product = model?.product, let vc = segue.destination as? PricesTableViewController else { return }
+    //            vc.vendorCode = product.vendorCode
+    //        }
+    //    }
     
     // MARK: - Actions
     @IBAction func addPhotoDidTapped(_ sender: UIButton) {
         presentAddPhotoActionSheet()
+    }
+    
+    @IBAction func addToCartDidTapped(_ sender: UIButton) {
+        guard let model = model, let product = model.product else {
+            return
+        }
+        if isAddedToCart {
+            self.reealmManager.deleteProduct(product: product)
+            isAddedToCart = false
+            updateButonState()
+            return
+        }
+        self.reealmManager.saveProduct(product: product)
+        isAddedToCart = true
+        updateButonState()
     }
 }
 
@@ -214,7 +247,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             case 0: cell.valueLabel.text = product.auto
             case 1:
                 cell.valueLabel.text = "\(product.price)"
-//                cell.arrowView.isHidden = false
+                //                cell.arrowView.isHidden = false
             case 2:
                 cell.valueLabel.text = "\(product.balance)"
             case 3: cell.valueLabel.text = product.id
@@ -226,16 +259,16 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
     }
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//        switch indexPath.row {
-//        case 1:
-//            performSegue(withIdentifier: "Prices", sender: nil)
-//        default:
-//            tableView.deselectRow(at: indexPath, animated: false)
-//        }
-//    }
+    //@bobermiha расскомментить когда бек будет готов
+    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    //
+    //        switch indexPath.row {
+    //        case 1:
+    //            performSegue(withIdentifier: "Prices", sender: nil)
+    //        default:
+    //            tableView.deselectRow(at: indexPath, animated: false)
+    //        }
+    //    }
 }
 
 // MARK: - CollectionViewDelegate and DataSource
@@ -390,5 +423,5 @@ extension MainViewController: UISearchBarDelegate {
         guard let text = searchBar.text, text != "" else { return }
         loadProductInfo(code: text)
     }
-
+    
 }

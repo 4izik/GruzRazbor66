@@ -432,6 +432,9 @@
                                         <integer key="value" value="6"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addToCartDidTapped:" destination="q9Q-Ie-H7d" eventType="touchUpInside" id="xkY-CA-kto"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Kbs-xC-oz0">
                                 <rect key="frame" x="12" y="739.5" width="103" height="31"/>
@@ -605,16 +608,16 @@
         <!--Козина-->
         <scene sceneID="bxu-QW-AZF">
             <objects>
-                <viewController id="5Nu-hW-5T0" sceneMemberID="viewController">
+                <viewController id="5Nu-hW-5T0" customClass="CarViewController" customModule="GruzRazbor66" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Nqc-Ok-qgZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="SU2-kJ-WB5">
-                                <rect key="frame" x="0.0" y="88" width="414" height="615.5"/>
+                                <rect key="frame" x="0.0" y="104" width="414" height="599.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="160" id="yPq-bo-ELr">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NoItemTableViewCell" rowHeight="160" id="yPq-bo-ELr" customClass="NoItemCartTableViewCell" customModule="GruzRazbor66" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yPq-bo-ELr" id="b3Q-g4-Pf6">
@@ -652,7 +655,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="08d-Z4-6gt">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CartItemTableViewCell" id="08d-Z4-6gt" customClass="CartItemTableViewCell" customModule="GruzRazbor66" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="204.5" width="414" height="207"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="08d-Z4-6gt" id="9xV-EJ-HNW">
@@ -681,27 +684,18 @@
                                                                     <rect key="frame" x="106" y="0.0" width="276" height="120"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Привод ТНВД ЯМЗ-7511 в сборе (ось, шестерня, полумуфта онов..." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="orD-nn-ZIw">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="276" height="48"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="276" height="72"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="height" constant="40" id="tvY-UD-my6"/>
+                                                                                <constraint firstAttribute="height" constant="35" id="tvY-UD-my6"/>
                                                                             </constraints>
                                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Артикул: 5430-2122211" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQM-cs-N5f">
-                                                                            <rect key="frame" x="0.0" y="48" width="276" height="24"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="height" constant="24" id="lmo-1K-V2B"/>
-                                                                            </constraints>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                            <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Склад: Екатеринбург" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zb0-bJ-NKe">
                                                                             <rect key="frame" x="0.0" y="72" width="276" height="24"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="height" constant="24" id="1dm-TU-cwP"/>
+                                                                                <constraint firstAttribute="height" constant="24" id="lmo-1K-V2B"/>
                                                                             </constraints>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <nil key="textColor"/>
@@ -734,6 +728,9 @@
                                                                     </constraints>
                                                                     <state key="normal" title="Button"/>
                                                                     <buttonConfiguration key="configuration" style="plain" image="deleteButton"/>
+                                                                    <connections>
+                                                                        <action selector="deleteButtonDidTapped:" destination="08d-Z4-6gt" eventType="touchUpInside" id="7aN-7E-uBB"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="35" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fR9-f8-ZOF">
                                                                     <rect key="frame" x="345.5" y="9.5" width="20.5" height="21"/>
@@ -743,6 +740,9 @@
                                                                 </label>
                                                                 <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="A0U-7E-1wB">
                                                                     <rect key="frame" x="236.5" y="4" width="94" height="32"/>
+                                                                    <connections>
+                                                                        <action selector="stepperValueDidChange:" destination="08d-Z4-6gt" eventType="valueChanged" id="JQN-9b-6Eo"/>
+                                                                    </connections>
                                                                 </stepper>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -777,8 +777,18 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="imgView" destination="1y2-iM-1w5" id="xkb-uH-y5L"/>
+                                            <outlet property="priceLabel" destination="GHN-9w-dzl" id="I8D-KO-gwr"/>
+                                            <outlet property="titleLabel" destination="orD-nn-ZIw" id="S9n-TU-cNl"/>
+                                            <outlet property="vendorCodeLabel" destination="BQM-cs-N5f" id="aSa-2x-AaL"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="5Nu-hW-5T0" id="bGR-yX-21Q"/>
+                                    <outlet property="delegate" destination="5Nu-hW-5T0" id="dmR-Hk-nq9"/>
+                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ls9-MZ-Szr">
                                 <rect key="frame" x="16" y="749" width="382" height="48"/>
@@ -825,10 +835,13 @@
                             <constraint firstItem="tsK-5f-2D8" firstAttribute="top" secondItem="SU2-kJ-WB5" secondAttribute="bottom" constant="16" id="hPU-m6-tOz"/>
                             <constraint firstItem="SU2-kJ-WB5" firstAttribute="leading" secondItem="Xll-CD-dYQ" secondAttribute="leading" id="kob-eO-hvm"/>
                             <constraint firstItem="Xll-CD-dYQ" firstAttribute="trailing" secondItem="tsK-5f-2D8" secondAttribute="trailing" constant="16" id="pZX-ch-HJv"/>
-                            <constraint firstItem="SU2-kJ-WB5" firstAttribute="top" secondItem="Xll-CD-dYQ" secondAttribute="top" id="yuA-8H-Jj5"/>
+                            <constraint firstItem="SU2-kJ-WB5" firstAttribute="top" secondItem="Xll-CD-dYQ" secondAttribute="top" constant="16" id="yuA-8H-Jj5"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Козина" id="TPO-Sw-hgg"/>
+                    <connections>
+                        <outlet property="tableView" destination="SU2-kJ-WB5" id="nsh-gh-tUg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AeA-JC-VO9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

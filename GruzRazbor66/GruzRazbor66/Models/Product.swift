@@ -17,6 +17,8 @@ struct Product {
     let balance: Int
     let price: Int
     let isAvito: Bool
+    var photo: Data?
+    var steppedCount = 0
 }
 
 extension Product {
@@ -30,5 +32,22 @@ extension Product {
         self.balance = dto.balance ?? 0
         self.price = dto.price ?? 0
         self.isAvito = dto.isAvito ?? false
+    }
+}
+
+extension Product {
+    var entity: ProductInfoEntity {
+        let entity = ProductInfoEntity()
+        entity.id = self.id
+        entity.vendorCode = self.vendorCode
+        entity.code = self.code
+        entity.cell = self.cell
+        entity.auto = self.auto
+        entity.balance = self.balance
+        entity.price = self.price
+        entity.name = self.name
+        entity.isAvito = self.isAvito
+        entity.photo = self.photo
+        return entity
     }
 }
