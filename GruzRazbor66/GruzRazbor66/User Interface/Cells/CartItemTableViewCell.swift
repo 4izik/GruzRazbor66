@@ -15,6 +15,8 @@ class CartItemTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var vendorCodeLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var stepper: UIStepper!
+    @IBOutlet weak var counterLabel: UILabel!
     
     var deleteDidTapped: (()->())?
     var stepperChanged: (()->())?
@@ -24,6 +26,7 @@ class CartItemTableViewCell: UITableViewCell {
             titleLabel.text = product.name
             vendorCodeLabel.text = "Артикул: \(product.vendorCode)"
             priceLabel.text = "\(Double(product.price)) руб."
+            counterLabel.text = "\(product.steppedCount)"
             if let photo = product.photo, let image = UIImage(data: photo) {
                 imgView.image = image
             }
@@ -37,7 +40,7 @@ class CartItemTableViewCell: UITableViewCell {
     }
     
     
-    @IBAction func stepperValueDidChange(_ sender: Any) {
+    @IBAction func stepperValueDidChange(_ sender: UIStepper) {
         stepperChanged?()
     }
     

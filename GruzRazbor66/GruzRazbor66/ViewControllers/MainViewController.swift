@@ -149,9 +149,9 @@ class MainViewController: UIViewController {
                             images.append(decodedimage!)
                         }
                     }
-                    if let cartImage = Data(base64Encoded: photos[0].base64String, options: [.ignoreUnknownCharacters]) {
-                        product.photo = cartImage
-                    }
+//                    if let cartImage = Data(base64Encoded: photos[0].base64String, options: [.ignoreUnknownCharacters]), !photos.isEmpty {
+//                        product.photo = cartImage
+//                    }
                 }
                 DispatchQueue.main.async {
                     self.addPhotos(photos: images)
